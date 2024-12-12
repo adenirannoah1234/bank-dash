@@ -1,16 +1,31 @@
+import { Box, Flex, HStack, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
+import Header from './components/Header';
+// import ChartOne from './components/ChartOne';
+import DashboardBarChart from './components/charts/DashboardBarChart';
+import DashboardPieChart from './components/charts/DashboardPieChart';
+import DashboardSplineChart from './components/charts/DashboardSplineChart';
+import SendFunds from './components/QuickTransfer';
+// import PieCharts from './components/PieCharts';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <Image
-        src="/bank.png"
-        alt="Bank Dash Logo"
-        width={250}
-        height={250}
-        style={{ objectFit: 'contain' }}
-      />
-      <p className="text-6xl font-bold">Welcome to Bank Dash</p>
-    </div>
+    <VStack align={'stretch'} w={'full'} h={'full'} spacing={8}>
+      <Header />
+      {/* <ChartOne /> */}
+      {/* <PieCharts /> */}
+      <Flex gap={5}>
+        <Box w={'650px'}>
+          <DashboardBarChart />
+        </Box>
+        <Box w={'350px'}>
+          <DashboardPieChart />
+        </Box>
+      </Flex>
+      <Flex gap={5}>
+        <SendFunds />
+        <DashboardSplineChart />
+      </Flex>
+    </VStack>
   );
 }

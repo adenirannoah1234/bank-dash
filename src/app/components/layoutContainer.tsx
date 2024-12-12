@@ -31,7 +31,7 @@ export const LayoutContainer = ({
             zIndex={998}
           />
         )} */}
-        <main className="flex-1 overflow-y-auto min-w-0 p-4 bg-custom-gray">
+        <main className="flex-1 overflow-y-auto min-w-0 p-6 bg-custom-gray">
           {children}
         </main>
       </div>
