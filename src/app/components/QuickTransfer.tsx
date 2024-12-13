@@ -17,6 +17,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useState, useCallback, useEffect } from 'react';
 import { TransferContent } from '../constants/data';
+import { LuSend } from 'react-icons/lu';
 
 export default function SendFunds() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -64,6 +65,7 @@ export default function SendFunds() {
         fontWeight={'semibold'}
         mb={4}
         color={'#343d6bff'}
+        maxW={{ base: '100%', lg: '445px' }}
       >
         Quick Transfer
       </Heading>
@@ -133,20 +135,42 @@ export default function SendFunds() {
           />
         </Flex>
         <HStack>
-          <Text>Write Amount</Text>
+          <Text color={'#718ebfff'}>Write Amount</Text>
           <Flex align="center" marginTop="4">
             <FormControl>
               <InputGroup>
                 {' '}
                 <Input
                   type="number"
-                  placeholder="Write Amount"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   flex="1"
                   marginRight="2"
+                  borderRadius={'full'}
+                  border="none"
+                  _focus={{
+                    border: 'none',
+                    boxShadow: 'none',
+                  }}
+                  _hover={{
+                    border: 'none',
+                  }}
+                  outline="none"
+                  bg={'#edf1f7ff'}
                 />
-                <InputRightElement />
+                <InputRightElement width="5rem">
+                  <Button
+                    h="2.5rem"
+                    px={'3rem'}
+                    size="sm"
+                    borderRadius={'full'}
+                    bg={'#1713f2ff'}
+                    color={'white'}
+                    rightIcon={<LuSend size={20} />}
+                  >
+                    Send
+                  </Button>
+                </InputRightElement>
               </InputGroup>
             </FormControl>
           </Flex>

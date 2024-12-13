@@ -1,24 +1,29 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import TopNav from './TopNav';
+import { Box } from '@chakra-ui/react';
 
 export const LayoutContainer = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <div className="flex h-screen overflow-hidden">
       <nav className="flexShrink-0 h-screen ">
-        <Sidebar />
+        <Sidebar
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+        />
       </nav>
       <div className="flex flex-col w-full h-screen overflow-hidden flex-1">
         <header className="flexShrink-0  ">
-          <TopNav />{' '}
+          <TopNav onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />{' '}
         </header>
-        {/* {isMobileMenuOpen && (
+        {isMobileMenuOpen && (
           <Box
             position="fixed"
             top={0}
@@ -30,7 +35,7 @@ export const LayoutContainer = ({
             onClick={() => setIsMobileMenuOpen(false)}
             zIndex={998}
           />
-        )} */}
+        )}
         <main className="flex-1 overflow-y-auto min-w-0 p-6 bg-custom-gray">
           {children}
         </main>
