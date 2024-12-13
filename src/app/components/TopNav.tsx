@@ -14,7 +14,12 @@ import { TbSettings } from 'react-icons/tb';
 import { BellDot, Search } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-const TopNav = () => {
+import { RxHamburgerMenu } from 'react-icons/rx';
+
+interface TopNavProps {
+  onMenuClick: () => void;
+}
+const TopNav = ({ onMenuClick }: TopNavProps) => {
   const pathname = usePathname();
   // this is the function to get the current page name so i can display it in the navbar
   const getPageName = () => {
@@ -30,10 +35,28 @@ const TopNav = () => {
       h={'6.25rem'}
       px={'2rem'}
     >
-      <Heading as="h1" size="lg">
+      <Flex alignItems="center" gap={4}>
+        <IconButton
+          display={{ base: 'flex', lg: 'none' }}
+          aria-label="Open menu"
+          icon={<RxHamburgerMenu size={28} />}
+          onClick={onMenuClick}
+          bg={'white'}
+          _hover={{
+            bg: 'white',
+          }}
+          // color={'#ffffff'}
+          // rounded={'full'}
+          size={'lg'}
+        />
+        <Heading as="h1" size="lg" display={{ base: 'none', lg: 'flex' }}>
+          {getPageName()}
+        </Heading>
+      </Flex>
+      <Heading as="h1" size="lg" display={{ base: 'flex', lg: 'none' }}>
         {getPageName()}
       </Heading>
-      <HStack spacing={'1.5rem'}>
+      <HStack spacing={'1.5rem'} display={{ base: 'none', lg: 'flex' }}>
         <InputGroup size={'md'}>
           <InputLeftElement
             pointerEvents="none"
@@ -80,6 +103,14 @@ const TopNav = () => {
           borderRadius={'full'}
         />
       </HStack>
+      <Box display={{ base: 'block', lg: 'none' }}>
+        <Avatar
+          size={'md'}
+          name={'HP'}
+          src={'/christiana.png'}
+          borderRadius={'full'}
+        />
+      </Box>
     </Flex>
   );
 };

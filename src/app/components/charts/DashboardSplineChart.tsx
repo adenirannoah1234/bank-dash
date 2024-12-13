@@ -27,11 +27,11 @@ const DashboardSplineChart = () => {
     },
     stroke: {
       curve: 'smooth',
-      colors: ['#1713f2ff'], // Chakra UI blue.500
+      colors: ['#1713f2ff'],
       width: 4,
     },
     fill: {
-      colors: ['#d9e2ffff'], // Chakra UI blue.200
+      colors: ['#d9e2ffff'],
       type: 'solid',
       opacity: 0.8,
     },
@@ -40,7 +40,7 @@ const DashboardSplineChart = () => {
       categories: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
       labels: {
         style: {
-          colors: '#64748B', // Chakra UI gray.500
+          colors: '#64748B',
           fontSize: '12px',
         },
       },
@@ -77,7 +77,7 @@ const DashboardSplineChart = () => {
   };
 
   return (
-    <Box w={'635px'}>
+    <Box width={{ base: '100%', lg: '635px' }}>
       <Heading
         as="h3"
         fontSize={'1.375rem'}

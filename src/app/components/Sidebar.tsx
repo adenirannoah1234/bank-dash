@@ -5,9 +5,16 @@ import { usePathname } from 'next/navigation';
 import { SidebarLinks } from '../constants/SidebarLinks';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-// import Icon from '@chakra-ui/react'
+import { IconButton, Box } from '@chakra-ui/react';
+import { IoMdClose } from 'react-icons/io';
 
-const Sidebar = () => {
+// import Icon from '@chakra-ui/react'
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const pathname = usePathname();
   const [activePath, setActivePath] = useState('');
 
@@ -16,8 +23,53 @@ const Sidebar = () => {
   }, [pathname]);
 
   return (
-    <div className="flex flex-col h-screen bg-white p-4 shadow- w-[220px]">
-      <div className="flex  items-center justify-center mb-8 gap-2 mt-4">
+    <Box
+      bg="white"
+      // color="white"
+      p={4}
+      // borderRight="1px solid gray.700"
+      h="100vh"
+      zIndex={999}
+      position={{ base: 'fixed', lg: 'static' }}
+      width={{ base: '240px', lg: '220px' }}
+      display={{ base: isOpen ? 'block' : 'none', lg: 'block' }}
+      left={0}
+      top={0}
+      transform={{
+        base: isOpen ? 'translateX(0)' : 'translateX(-100%)',
+        lg: 'none',
+      }}
+      transition="transform 0.3s ease-in-out"
+      // overflowY="auto"
+      // css={{
+      //   '&::-webkit-scrollbar': {
+      //     width: '8px',
+      //     backgroundColor: '#292929ff',
+      //   },
+      //   '&::-webkit-scrollbar-thumb': {
+      //     borderRadius: '8px',
+      //     backgroundColor: '#555',
+      //   },
+      // }}
+    >
+      <IconButton
+        aria-label="Close menu"
+        icon={<IoMdClose size={24} />}
+        size="md"
+        variant="ghost"
+        position="absolute"
+        right={2}
+        top={2}
+        display={{ base: 'flex', lg: 'none' }}
+        // color="white"
+        _hover={{ bg: 'white' }}
+        onClick={onClose}
+      />
+      {/* <div className="flex flex-col h-screen bg-white p-4 shadow- w-[220px] 
+    
+    
+    "> */}
+      <div className="flex items-center justify-center mb-8 gap-2 mt-6 md:mt-6 lg:mt-4 sm:mt-8">
         <Image src="/bank.png" alt="Bank Dash Logo" width={30} height={30} />
         <h1 className="text-3xl font-bold text-[#343d6bff]">BankDash.</h1>
       </div>
@@ -51,7 +103,8 @@ const Sidebar = () => {
           );
         })}
       </ul>
-    </div>
+      {/* </div> */}
+    </Box>
   );
 };
 
