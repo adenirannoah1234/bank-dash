@@ -42,7 +42,6 @@ export default function SendFunds() {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  // Update scroll ability
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setCanScrollPrev(emblaApi.canScrollPrev());
@@ -58,10 +57,10 @@ export default function SendFunds() {
   }, [emblaApi, onSelect]);
 
   return (
-    <Box>
+    <Box maxWidth={{ base: '100%', md: '445px' }} margin="auto">
       <Heading
         as="h3"
-        fontSize={'1.375rem'}
+        fontSize={{ base: '1.25rem', md: '1.375rem' }} // Responsive font size
         fontWeight={'semibold'}
         mb={4}
         color={'#343d6bff'}
@@ -70,25 +69,26 @@ export default function SendFunds() {
         Quick Transfer
       </Heading>
       <Box
-        maxWidth="445px"
-        margin="auto"
-        h={276}
         py={'4'}
         px={'6'}
         bg="white"
         borderRadius="3xl"
         boxShadow="md"
+        h={{ base: 'auto', md: '276px' }}
       >
-        <Flex align="center" marginTop={'10'} position="relative">
+        <Flex
+          align="center"
+          marginTop={{ base: '4', md: '10' }}
+          position="relative"
+        >
           <IconButton
             position="absolute"
-            left="-20px"
+            left={{ base: '-19px', md: '-20px' }}
             top="50%"
             transform="translateY(-50%)"
             aria-label="Scroll left"
             icon={<ChevronLeftIcon />}
             onClick={scrollPrev}
-            // variant="ghost"
             color={'#718ebfff'}
             boxShadow={'0px 0px 10px #718ebfff'}
             borderRadius={'full'}
@@ -120,13 +120,12 @@ export default function SendFunds() {
 
           <IconButton
             position="absolute"
-            right="-20px"
+            right={{ base: '-19px', md: '-20px' }} // Responsive positioning
             top="50%"
             transform="translateY(-50%)"
             aria-label="Scroll right"
             icon={<ChevronRightIcon />}
             onClick={scrollNext}
-            // variant="ghost"
             isDisabled={!canScrollNext}
             boxShadow={'0px 0px 10px #718ebfff'}
             borderRadius={'full'}
@@ -139,7 +138,6 @@ export default function SendFunds() {
           <Flex align="center" marginTop="4">
             <FormControl>
               <InputGroup>
-                {' '}
                 <Input
                   type="number"
                   value={amount}

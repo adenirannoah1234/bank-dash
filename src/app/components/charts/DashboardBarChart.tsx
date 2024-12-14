@@ -14,6 +14,7 @@ const DashboardBarChart = () => {
         show: false,
       },
     },
+
     colors: ['#1713f2ff', '#16dbcbff'],
     plotOptions: {
       bar: {

@@ -13,7 +13,6 @@ import {
 import { TbSettings } from 'react-icons/tb';
 import { BellDot, Search } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-
 import { RxHamburgerMenu } from 'react-icons/rx';
 
 interface TopNavProps {
@@ -23,7 +22,7 @@ const TopNav = ({ onMenuClick }: TopNavProps) => {
   const pathname = usePathname();
   // this is the function to get the current page name so i can display it in the navbar
   const getPageName = () => {
-    if (pathname === '/') return 'Dashboard';
+    if (pathname === '/') return 'Overview';
     return (
       pathname.substring(1).charAt(0).toUpperCase() + pathname.substring(2)
     );
