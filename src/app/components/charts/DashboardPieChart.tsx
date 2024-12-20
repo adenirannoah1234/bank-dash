@@ -1,9 +1,7 @@
-// ExpensePieChart.tsx
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Box } from '@chakra-ui/react';
 
-// Dynamically import ApexCharts on client side only
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const ExpensePieChart = () => {
@@ -46,12 +44,12 @@ const ExpensePieChart = () => {
           offsetY: 0,
           customScale: 1,
           dataLabels: {
-            offset: -25, // Moves labels closer to the edge
+            offset: -25,
           },
           donut: {
             size: '0%',
           },
-          gap: '9%', // Adds space between pie segments
+          gap: '9%',
         },
       },
       stroke: {
