@@ -44,12 +44,12 @@ const ExpensePieChart = () => {
           offsetY: 0,
           customScale: 1,
           dataLabels: {
-            offset: -25, // Moves labels closer to the edge
+            offset: -25,
           },
           donut: {
             size: '0%',
           },
-          gap: '9%', // Adds space between pie segments
+          gap: '9%',
         },
       },
       stroke: {
