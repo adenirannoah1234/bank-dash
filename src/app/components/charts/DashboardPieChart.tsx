@@ -1,9 +1,7 @@
-// ExpensePieChart.tsx
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Box } from '@chakra-ui/react';
 
-// Dynamically import ApexCharts on client side only
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const ExpensePieChart = () => {
