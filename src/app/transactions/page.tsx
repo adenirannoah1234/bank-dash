@@ -7,6 +7,7 @@ const page = () => {
   return (
     <VStack align={'stretch'} w={'full'} h={'full'} spacing={8}>
       <Header />
+
       <RecentTransactions />
     </VStack>
   );
