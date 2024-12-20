@@ -9,10 +9,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 import AllTransactionTable from './AllTransactionTable';
+import MobileTable from './MobileTable';
 
 const RecentTransactions = () => {
   return (
-    <Box>
+    <Box marginTop={{ base: '3.2rem', lg: '1rem' }}>
       <Text fontSize={'1.2rem'} fontWeight={'semibold'} color={'#343d6bff'}>
         Recent Transactions
       </Text>
@@ -49,7 +50,12 @@ const RecentTransactions = () => {
 
         <TabPanels>
           <TabPanel>
-            <AllTransactionTable />
+            <Box display={{ base: 'none', lg: 'block' }}>
+              <AllTransactionTable />
+            </Box>
+            <Box display={{ base: 'block', lg: 'none' }}>
+              <MobileTable />
+            </Box>
           </TabPanel>
           <TabPanel>
             <p>two!</p>

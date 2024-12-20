@@ -120,7 +120,7 @@ export default function SendFunds() {
 
           <IconButton
             position="absolute"
-            right={{ base: '-19px', md: '-20px' }} // Responsive positioning
+            right={{ base: '-19px', md: '-20px' }} 
             top="50%"
             transform="translateY(-50%)"
             aria-label="Scroll right"

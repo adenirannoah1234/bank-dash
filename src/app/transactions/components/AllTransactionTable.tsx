@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   Box,
@@ -13,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { AllTransactions } from '@/app/constants/data';
+import Pagination from '@/app/components/pagination';
 
 const AllTransactionTable = () => {
   return (
@@ -150,6 +153,15 @@ const AllTransactionTable = () => {
           ))}
         </Tbody>
       </Table>
+      <Flex justifyContent={'flex-end'} my={4}>
+        <Pagination
+          onPageChange={(pageNumber) => console.log(pageNumber)}
+          currentPage={1}
+          pageSize={2}
+          totalCount={AllTransactions.length}
+          siblingCount={1}
+        />
+      </Flex>
     </Box>
   );
 };

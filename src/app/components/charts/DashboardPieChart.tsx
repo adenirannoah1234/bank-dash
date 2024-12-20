@@ -1,83 +1,98 @@
-'use client';
+// ExpensePieChart.tsx
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
+// Dynamically import ApexCharts on client side only
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const DashboardPieChart = () => {
-  const expenseStatisticsOptions: ApexCharts.ApexOptions = {
-    chart: {
-      type: 'pie',
-    },
-    labels: ['Bill Expense', 'Others', 'Investment', 'Entertainment'],
-    colors: ['#fc7a00ff', '#1713f2ff', '#fb00ffff', '#333b69ff'],
-    dataLabels: {
-      enabled: true,
-      formatter: function (val: number, opts: any) {
-        return `${val.toFixed(0)}%\n${opts.w.config.labels[opts.seriesIndex]}`;
+const ExpensePieChart = () => {
+  const chartData: any = {
+    series: [30, 15, 20, 35],
+    options: {
+      chart: {
+        type: 'pie',
+        background: 'transparent',
       },
-      textAnchor: 'middle',
-      style: {
-        fontSize: '12px',
+      labels: ['Entertainment', 'Bill Expense', 'Investment', 'Others'],
+      colors: ['#3B4B84', '#FF6B00', '#E100FF', '#0066FF'],
+      legend: {
+        show: false,
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function (val: number, opts: any) {
+          const label = opts.w.config.labels[opts.seriesIndex];
+          return [val.toFixed(0) + '%', label];
+        },
+        style: {
+          fontSize: '16px',
+          fontWeight: '500',
+          colors: ['#fff', '#fff'],
+        },
+        textAnchor: 'middle',
+        distributed: true,
+        offsetY: 0,
+        dropShadow: {
+          enabled: false,
+        },
+      },
+      plotOptions: {
+        pie: {
+          startAngle: -90,
+          endAngle: 270,
+          expandOnClick: false,
+          offsetX: 0,
+          offsetY: 0,
+          customScale: 1,
+          dataLabels: {
+            offset: -25, // Moves labels closer to the edge
+          },
+          donut: {
+            size: '0%',
+          },
+          gap: '9%', // Adds space between pie segments
+        },
+      },
+      stroke: {
+        show: true,
+        width: 3,
         colors: ['#fff'],
-        fontWeight: 'bold',
-        fontFamily: 'inherit',
       },
-      dropShadow: {
-        enabled: false,
-      },
-    },
-    plotOptions: {
-      pie: {
-        donut: {
-          size: '75%',
-        },
-        dataLabels: {
-          offset: -30,
-          minAngleToShowLabel: 10,
+      tooltip: {
+        enabled: true,
+        y: {
+          formatter: (val: number) => `${val}%`,
         },
       },
-    },
-    stroke: {
-      colors: ['#fff'],
-      width: 7,
-    },
-    legend: {
-      show: false,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 350,
+              height: 367,
+            },
+            legend: {
+              show: false,
+            },
+          },
+        },
+      ],
     },
   };
 
-  const expenseStatisticsSeries = [15, 35, 20, 30];
-
   return (
-    <Box>
-      <Heading
-        as="h3"
-        fontSize={'1.375rem'}
-        fontWeight={'semibold'}
-        mb={4}
-        color={'#343d6bff'}
-      >
-        Expense Statistics
-      </Heading>
-      <Box
-        border="1px"
-        borderColor="gray.200"
-        borderRadius="3xl"
-        p={4}
-        bg="white"
-        boxShadow="md"
-      >
-        <Chart
-          options={expenseStatisticsOptions}
-          series={expenseStatisticsSeries}
-          type="pie"
-          height={372}
-        />
-      </Box>
+    <Box bg="white" w="350px" h="367px" position="relative">
+      <Chart
+        options={chartData.options}
+        series={chartData.series}
+        type="pie"
+        width="350"
+        height="367"
+      />
     </Box>
   );
 };
 
-export default DashboardPieChart;
+export default ExpensePieChart;

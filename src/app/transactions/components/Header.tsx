@@ -32,8 +32,15 @@ const Header = () => {
         <Flex
           gap={6}
           mt={4}
-          direction={{ base: 'column', lg: 'row' }}
           align={'center'}
+          overflowX={'scroll'}
+          overflowY={{ base: 'hidden', md: 'visible' }}
+          sx={{
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+            scrollbarWidth: 'none',
+          }}
         >
           <Image src="/blue.png" alt="blue" width={350} height={225} />
           <Image src="/white.png" alt="white" width={350} height={225} />
