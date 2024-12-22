@@ -13,7 +13,8 @@ import {
   InputGroup,
   Heading,
 } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useState, useCallback, useEffect } from 'react';
 import { TransferContent } from '../constants/data';
@@ -87,7 +88,7 @@ export default function SendFunds() {
             top="50%"
             transform="translateY(-50%)"
             aria-label="Scroll left"
-            icon={<ChevronLeftIcon />}
+            icon={<FaChevronLeft />}
             onClick={scrollPrev}
             color={'#718ebfff'}
             boxShadow={'0px 0px 10px #718ebfff'}
@@ -120,11 +121,11 @@ export default function SendFunds() {
 
           <IconButton
             position="absolute"
-            right={{ base: '-19px', md: '-20px' }} 
+            right={{ base: '-19px', md: '-20px' }}
             top="50%"
             transform="translateY(-50%)"
             aria-label="Scroll right"
-            icon={<ChevronRightIcon />}
+            icon={<FaChevronRight />}
             onClick={scrollNext}
             isDisabled={!canScrollNext}
             boxShadow={'0px 0px 10px #718ebfff'}
