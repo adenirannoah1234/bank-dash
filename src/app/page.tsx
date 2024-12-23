@@ -65,7 +65,12 @@ export default function Home() {
           <DashboardPieChart />
         </Box>
       </Flex>
-      <Flex gap={5} direction={{ base: 'column', lg: 'row' }} align={'center'}>
+      <Flex
+        gap={5}
+        direction={{ base: 'column', lg: 'row' }}
+        align={'center'}
+        pb={{ base: '30px', lg: 0 }}
+      >
         <SendFunds />
         <DashboardSplineChart />
       </Flex>

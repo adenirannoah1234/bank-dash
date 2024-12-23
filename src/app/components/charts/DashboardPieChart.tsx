@@ -13,7 +13,7 @@ const ExpensePieChart = () => {
         background: 'transparent',
       },
       labels: ['Entertainment', 'Bill Expense', 'Investment', 'Others'],
-      colors: ['#3B4B84', '#FF6B00', '#E100FF', '#0066FF'],
+      colors: ['#343d6bff', '#fc7a00ff', '#fb00ffff', '#1713f2ff'],
       legend: {
         show: false,
       },
@@ -81,13 +81,21 @@ const ExpensePieChart = () => {
   };
 
   return (
-    <Box bg="white" w="350px" h="367px" position="relative">
+    <Box
+      bg="white"
+      w="350px"
+      h="330px"
+      position="relative"
+      mt={9}
+      borderRadius={'3xl'}
+      boxShadow={'md'}
+    >
       <Chart
         options={chartData.options}
         series={chartData.series}
         type="pie"
         width="350"
-        height="367"
+        height="323"
       />
     </Box>
   );

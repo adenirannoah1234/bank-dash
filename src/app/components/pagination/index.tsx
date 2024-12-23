@@ -7,6 +7,12 @@ import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { RxCaretRight } from 'react-icons/rx';
 import { RxCaretLeft } from 'react-icons/rx';
+import {
+  FaChevronCircleLeft,
+  FaChevronCircleRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa';
 
 function Pagination({
   onPageChange,
@@ -46,7 +52,7 @@ function Pagination({
     <HStack>
       <Button
         variant={'outline'}
-        leftIcon={<RxCaretLeft size={30} />}
+        leftIcon={<FaChevronLeft size={20} />}
         onClick={onPrevious}
         color={'#1713f2ff'}
         fontSize={'md'}
@@ -91,7 +97,7 @@ function Pagination({
 
       <Button
         variant={'outline'}
-        rightIcon={<RxCaretRight size={30} />}
+        rightIcon={<FaChevronRight size={20} />}
         onClick={onNext}
         color={'#1713f2ff'}
         fontSize={'small'}
