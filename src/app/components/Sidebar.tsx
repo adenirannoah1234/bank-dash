@@ -65,11 +65,8 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         _hover={{ bg: 'white' }}
         onClick={onClose}
       />
-      {/* <div className="flex flex-col h-screen bg-white p-4 shadow- w-[220px] 
-    
-    
-    "> */}
-      <div className="flex items-center justify-center mb-8 gap-2 mt-6 md:mt-6 lg:mt-4 sm:mt-8">
+
+      <div className="flex items-center justify-center mb-8 gap-2 mt-10 sm:mt-8 md:mt-10 lg:mt-4">
         <Image src="/bank.png" alt="Bank Dash Logo" width={30} height={30} />
         <h1 className="text-3xl font-bold text-[#343d6bff]">BankDash.</h1>
       </div>
