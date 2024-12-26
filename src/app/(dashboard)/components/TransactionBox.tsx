@@ -1,7 +1,7 @@
 import { Box, Flex, Text, HStack, IconButton, Stack } from '@chakra-ui/react';
 import React from 'react';
 import Image from 'next/image';
-import { TransactionData } from '../constants/data';
+import { TransactionData } from '../../constants/data';
 
 const TransactionBox = () => {
   return (

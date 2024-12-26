@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { SidebarLinks } from '../constants/SidebarLinks';
+import { SidebarLinks } from '../../constants/SidebarLinks';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IconButton, Box } from '@chakra-ui/react';
