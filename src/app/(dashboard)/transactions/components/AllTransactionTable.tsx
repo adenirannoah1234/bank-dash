@@ -14,8 +14,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { AllTransactions } from '@/app/constants/data';
-import Pagination from '@/app/components/pagination';
+import { AllTransactions } from '../../../constants/data';
+import Pagination from '../../components/pagination';
 
 const AllTransactionTable = () => {
   return (

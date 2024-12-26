@@ -1,7 +1,6 @@
 import { HStack, Text, Flex, Box } from '@chakra-ui/react';
 import Image from 'next/image';
-import BarChart from './BarChart';
-
+import BarChart from './Barchart';
 import React from 'react';
 
 const Header = () => {

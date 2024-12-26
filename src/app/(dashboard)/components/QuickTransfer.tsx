@@ -17,7 +17,7 @@ import {
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useState, useCallback, useEffect } from 'react';
-import { TransferContent } from '../constants/data';
+import { TransferContent } from '../../constants/data';
 import { LuSend } from 'react-icons/lu';
 
 export default function SendFunds() {

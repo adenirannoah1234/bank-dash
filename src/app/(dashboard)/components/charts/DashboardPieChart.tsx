@@ -1,6 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Box } from '@chakra-ui/react';
+import { Box, VStack } from '@chakra-ui/react';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -81,10 +81,10 @@ const ExpensePieChart = () => {
   };
 
   return (
-    <Box
+    <VStack
       bg="white"
       w="350px"
-      h="330px"
+      h={{ base: '350px', lg: '323px' }}
       position="relative"
       mt={9}
       borderRadius={'3xl'}
@@ -97,7 +97,7 @@ const ExpensePieChart = () => {
         width="350"
         height="323"
       />
-    </Box>
+    </VStack>
   );
 };
 
