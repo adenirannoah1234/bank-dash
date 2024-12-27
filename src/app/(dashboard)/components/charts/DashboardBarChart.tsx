@@ -1,8 +1,6 @@
-'use client';
-
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Box, Heading, Flex } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -10,22 +8,20 @@ const DashboardBarChart = () => {
   const weeklyActivityOptions: ApexCharts.ApexOptions = {
     chart: {
       type: 'bar',
-      toolbar: {
-        show: false,
-      },
+      toolbar: { show: false },
     },
-
-    colors: ['#1713f2ff', '#16dbcbff'],
+    colors: ['#1713f2', '#16dbcb'],
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '30%',
+        columnWidth: '60%',
         borderRadius: 5,
+        distributed: false,
+        rangeBarOverlap: false,
+        barHeight: '80%',
       },
     },
-    dataLabels: {
-      enabled: false,
-    },
+    dataLabels: { enabled: false },
     xaxis: {
       categories: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
       labels: {
@@ -47,9 +43,7 @@ const DashboardBarChart = () => {
       borderColor: '#e0e0e0',
       strokeDashArray: 5,
       yaxis: {
-        lines: {
-          show: true,
-        },
+        lines: { show: true },
       },
     },
     legend: {
@@ -59,8 +53,13 @@ const DashboardBarChart = () => {
         size: 10,
         strokeWidth: 2,
         shape: 'circle',
-        fillColors: ['#16dbcbff', '#ff82acff'],
+        fillColors: ['#16dbcb', '#ff82ac'],
       },
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ['transparent'],
     },
   };
 
@@ -79,17 +78,15 @@ const DashboardBarChart = () => {
     <Box>
       <Heading
         as="h3"
-        fontSize={'1.375rem'}
-        fontWeight={'semibold'}
+        fontSize="1.375rem"
+        fontWeight="semibold"
         mb={4}
-        color={'#343d6bff'}
+        color="#343d6b"
       >
         Weekly Activity
       </Heading>
       <Box
-        // flex="6"
-        // w={'730px'}
-        border="1px"
+        borderWidth="1px"
         borderColor="gray.200"
         borderRadius="3xl"
         p={4}
