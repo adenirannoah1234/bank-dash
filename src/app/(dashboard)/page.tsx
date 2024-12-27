@@ -57,6 +57,7 @@ export default function Home() {
         gap={5}
         direction={{ base: 'column', lg: 'row' }}
         alignItems={'center'}
+        justifyContent={'center'}
       >
         <Box w={{ base: '100%', lg: '650px' }}>
           <DashboardBarChart />
