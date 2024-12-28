@@ -32,7 +32,6 @@ const page = () => {
       maxW={{ base: '100%', md: 'md', lg: 'md' }}
       mx={'auto'}
       mt={{ base: '150px', md: '10' }}
-      px={{ base: '10', md: '0' }}
       w={'full'}
       align={'center'}
     >
@@ -47,7 +46,7 @@ const page = () => {
       <Text fontSize={'1.125rem'} mb="4" color={'#929294ff'} textAlign="center">
         Login in to your account.
       </Text>
-      <VStack spacing="4">
+      <VStack spacing="6">
         <FormControl isRequired>
           {/* <FormLabel>Email</FormLabel> */}
           <Input
@@ -103,7 +102,7 @@ const page = () => {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        <HStack spacing={{ base: '2rem', md: '10.5rem' }} mt="4">
+        <HStack spacing={{ base: '2rem', md: '10.5rem' }}>
           <Flex>
             <Switch
               colorScheme="blue"
