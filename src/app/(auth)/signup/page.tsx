@@ -38,11 +38,16 @@ const SignUp = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Add signup logic here
   };
 
   return (
-    <Box maxW="md" mx="auto" mt="3">
+    <Box
+      maxW={{ base: '100%', md: 'md', lg: 'md' }}
+      mx={'auto'}
+      mt={{ base: '50px', md: '10' }}
+      px={{ base: '10', md: '0' }}
+      w={'full'}
+    >
       <VStack as={'form'} onSubmit={handleSubmit} align={'stretch'}>
         <Text
           as="h1"
