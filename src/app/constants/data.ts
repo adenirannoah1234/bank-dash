@@ -112,3 +112,32 @@ export const AllTransactions = [
 
     
 ]
+
+export const HeaderServiceList = [
+    {
+        id: 1,
+        name: 'Life Insurance',
+        description:'Unlimited Protection',
+        
+        image:'/insurance.png',
+        
+    },
+    {
+        id: 2,
+        name: 'Shopping',
+        description:'Buy. Think. Grow.',
+       
+        image:'/shopping.png',
+        
+    },
+    {
+        id: 3,
+        name: 'Safety',
+        description:'We are your allies',
+       
+        image:'/safety.png',
+        
+    },
+    
+ 
+]
