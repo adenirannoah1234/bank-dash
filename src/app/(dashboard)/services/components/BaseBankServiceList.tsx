@@ -19,6 +19,7 @@ const BaseBankServiceList = () => {
             bg={'#ffffffff'}
             p={2}
             borderRadius={'3xl'}
+            boxShadow={'md'}
           >
             <Flex gap={5}>
               <Image src={service.imageOne} alt="icon" width={45} height={20} />
