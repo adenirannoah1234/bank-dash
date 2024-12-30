@@ -141,3 +141,62 @@ export const HeaderServiceList = [
     
  
 ]
+
+export const ServiceList = [
+    {
+        id: 1,
+        nameOne: 'Business loans',
+        descriptionOne: 'It is a long established',
+        nameTwo: 'Lorem ipsum ',
+        descriptionTwo: 'Many publishing',
+        imageOne:'/business.png',
+      
+        
+    },
+     
+    {
+        id: 2,
+        nameOne: 'Checking Accounts',
+        descriptionOne: 'It is a long established',
+        nameTwo: 'Lorem ipsum ',
+        descriptionTwo: 'Many publishing',
+        imageOne:'/insurance.png',
+        
+    },
+    {
+        id: 3,
+        nameOne: 'Savings Accounts',
+        descriptionOne: 'It is a long established',
+        nameTwo: 'Lorem ipsum ',
+        descriptionTwo: 'Many publishing',
+        imageOne:'/safety.png',
+        
+    },
+    {
+        id: 4,
+        nameOne: 'Debit and credit cards',
+        descriptionOne: 'It is a long established',
+        nameTwo: 'Lorem ipsum ',
+        descriptionTwo: 'Many publishing',
+        imageOne:'/shopping.png',
+        
+    },
+    {
+        id: 5,
+        nameOne: 'Life Insurance',
+        descriptionOne: 'It is a long established',
+        nameTwo: 'Lorem ipsum ',
+        descriptionTwo: 'Many publishing',
+        imageOne:'/insurance.png',
+        
+    },
+    {
+        id: 6,
+        nameOne: 'Business loans',
+        descriptionOne: 'It is a long established',
+        nameTwo: 'Lorem ipsum ',
+        descriptionTwo: 'Many publishing',
+        imageOne:'/business.png',
+        
+    }
+]
