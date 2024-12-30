@@ -18,6 +18,7 @@ const BankServiceList = () => {
             bg={'#ffffffff'}
             p={5}
             borderRadius={'3xl'}
+            boxShadow={'md'}
           >
             <Flex gap={5}>
               <Image src={service.imageOne} alt="icon" width={60} height={60} />

@@ -31,7 +31,7 @@ const TopNav = ({ onMenuClick }: TopNavProps) => {
     <Flex
       justifyContent={'space-between'}
       alignItems={'center'}
-      h={'6.25rem'}
+      h={{ base: '5rem', md: '6.25rem' }}
       px={'2rem'}
     >
       <Flex alignItems="center" gap={4}>
