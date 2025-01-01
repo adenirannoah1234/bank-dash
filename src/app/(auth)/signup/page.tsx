@@ -19,7 +19,18 @@ import { Icon } from 'lucide-react';
 import { useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { useCreateUserMutation } from '@/lib/features/auth/authSlice';
 
+const initialFormData = {
+  email: '',
+  password: '',
+  confirmPassword: '',
+
+  firstName: '',
+  lastName: '',
+  address: '',
+  phoneNumber: '',
+};
 const SignUp = () => {
   const toast = useToast();
   const [formData, setFormData] = useState({
@@ -35,9 +46,41 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => setShowPassword(!showPassword);
+  const [createUser, { isLoading: creatingUser, error: createUserError }] =
+    useCreateUserMutation();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    try {
+      const response = await createUser({
+        email: formData.email,
+        password: formData.password,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        house_address: formData.address,
+        phone_number: formData.phoneNumber,
+      });
+      console.log(response);
+      toast({
+        title: 'User Created',
+        description: response?.data?.message || 'User created successfully',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        variant: 'subtle',
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast({
+        title: 'Error',
+        description: error?.data?.message || 'An error occurred',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        variant: 'subtle',
+      });
+    }
   };
 
   return (
@@ -249,6 +292,7 @@ const SignUp = () => {
             color={'white'}
             mt="4"
             w="full"
+            isLoading={creatingUser}
           >
             Sign Up
           </Button>
