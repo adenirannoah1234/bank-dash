@@ -23,7 +23,7 @@ const ServiceHeader = () => {
         {HeaderServiceList.map((item, index) => (
           <Box
             key={index}
-            minW={{ base: '280px', md: '315px' }}
+            minW={{ base: '280px', md: '318px' }}
             flexShrink={0}
             bg="white"
             boxShadow="md"
