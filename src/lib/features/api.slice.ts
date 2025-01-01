@@ -7,7 +7,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = process.env.BASE_URL || 'https://adeniran1234.pythonanywhere.com';
+const BASE_URL = process.env.BACKEND_GENERAL_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
