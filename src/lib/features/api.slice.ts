@@ -11,14 +11,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
-  // prepareHeaders: (headers) => {
-  // get token from next auth
-  // const token = {};
-  // if (token) {
-  //   headers.set("Authorization", `Bearer ${token}`);
-  // }
-  // return headers;
-  // },
+  
 });
 
 const baseQueryWithReAuth = async (
@@ -27,11 +20,7 @@ const baseQueryWithReAuth = async (
   extraOptions: Record<string, unknown>
 ) => {
   const result = await baseQuery(args, api, extraOptions);
-  //check if refresh token is expired
-  // if(result.error && result.error.status === 401) {
-  //   const logout = api.dispatch(logoutUser());
-  //   logout()
-  // }
+  
 
   return result;
 };
