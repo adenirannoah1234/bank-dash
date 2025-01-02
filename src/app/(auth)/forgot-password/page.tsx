@@ -98,13 +98,17 @@ const ForgotPassword = () => {
             <Heading
               as="h2"
               fontWeight="semibold"
-              fontSize={'2.25rem'}
+              fontSize={{ base: '1.5rem', md: '2rem', lg: '2.25rem' }}
               color={'#343d6bff'}
             >
               Forgot Password?
             </Heading>
-            <Text textAlign="center" fontSize="1.125rem" color={'#929294ff'}>
-              We will send OTP t your email
+            <Text
+              textAlign="center"
+              fontSize={{ base: '0.776rem', md: '1.125rem', lg: '1.25rem' }}
+              color={'#929294ff'}
+            >
+              We will send OTP to your email
             </Text>
 
             <VStack as={'form'} w="100%" gap="1rem">
