@@ -1,5 +1,5 @@
 // import { appConfig } from '@/config';
-import { BaseQueryApi } from "@reduxjs/toolkit/query";
+import { BaseQueryApi, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 // import Cookies from 'js-cookie';
 import {
   FetchArgs,
@@ -7,7 +7,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = process.env.BACKEND_GENERAL_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
@@ -34,6 +34,19 @@ const baseQueryWithReAuth = async (
   // }
 
   return result;
+};
+
+export type ErrorResponse = {
+  status: number;
+  data: {
+    message: string;
+  };
+};
+
+export const isFetchBaseQueryError = (
+  error: unknown
+): error is FetchBaseQueryError => {
+  return typeof error === 'object' && error != null && 'status' in error;
 };
 
 export const apiSlice = createApi({

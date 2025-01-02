@@ -20,6 +20,8 @@ import { useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useCreateUserMutation } from '@/lib/features/auth/authSlice';
+import { useRouter } from 'next/navigation';
+import { isFetchBaseQueryError } from '@/lib/features/api.slice';
 
 const initialFormData = {
   email: '',
@@ -33,6 +35,7 @@ const initialFormData = {
 };
 const SignUp = () => {
   const toast = useToast();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -62,23 +65,49 @@ const SignUp = () => {
         phone_number: formData.phoneNumber,
       });
       console.log(response);
-      toast({
-        title: 'User Created',
-        description: response?.data?.message || 'User created successfully',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-        variant: 'subtle',
-      });
+      if (response?.data) {
+        toast({
+          title: 'User Created',
+          description: response?.data?.message || 'User created successfully',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          variant: 'subtle',
+          position: 'top',
+        });
+        router.push('/login');
+      } else if (response?.error) {
+        let errorMessage = 'An error occurred';
+
+        if (isFetchBaseQueryError(response.error)) {
+          // Access error as FetchBaseQueryError
+          const errData = response.error.data as { message: string };
+          errorMessage = errData?.message || errorMessage;
+        }
+
+        toast({
+          title: 'Error',
+          description: errorMessage,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          variant: 'subtle',
+          position: 'top',
+        });
+      }
     } catch (error: any) {
-      console.log(error);
+      console.log('Full error:', error);
+      console.log('Error data:', error.data);
+      console.log('Error message:', error.data?.message);
+
       toast({
         title: 'Error',
-        description: error?.data?.message || 'An error occurred',
+        description: error?.message || 'An error occurred',
         status: 'error',
         duration: 9000,
         isClosable: true,
         variant: 'subtle',
+        position: 'top',
       });
     }
   };
@@ -120,6 +149,8 @@ const SignUp = () => {
               }}
               name="firstName"
               placeholder="First Name"
+              py="1.5rem"
+              px="1rem"
               _placeholder={{
                 color: '#595959ff',
                 fontSize: '0.875rem',
@@ -134,6 +165,8 @@ const SignUp = () => {
             <Input
               type="text"
               name="lastName"
+              py="1.5rem"
+              px="1rem"
               placeholder="Last Name"
               _placeholder={{
                 color: '#595959ff',
@@ -154,6 +187,8 @@ const SignUp = () => {
               type="email"
               name="email"
               placeholder="Email"
+              py="1.5rem"
+              px="1rem"
               _placeholder={{
                 color: '#595959ff',
                 fontSize: '0.875rem',
@@ -177,6 +212,8 @@ const SignUp = () => {
                 color: '#595959ff',
                 fontSize: '0.875rem',
               }}
+              py="1.5rem"
+              px="1rem"
               border={'2px solid #d9d9d9ff'}
               _focus={{
                 borderColor: '#1713f2ff',
@@ -200,6 +237,8 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
+              py="1.5rem"
+              px="1rem"
               onChange={(e) =>
                 setFormData({ ...formData, phoneNumber: e.target.value })
               }
@@ -221,11 +260,13 @@ const SignUp = () => {
                 _focus={{
                   borderColor: '#1713f2ff',
                 }}
+                py="1.5rem"
+                px="1rem"
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
               />
-              <InputRightElement>
+              <InputRightElement marginTop={'6px'}>
                 <IconButton
                   aria-label="show password"
                   onClick={handleShowPassword}
@@ -257,6 +298,8 @@ const SignUp = () => {
                   color: '#595959ff',
                   fontSize: '0.875rem',
                 }}
+                py="1.5rem"
+                px="1rem"
                 border={'2px solid #d9d9d9ff'}
                 _focus={{
                   borderColor: '#1713f2ff',
@@ -265,11 +308,12 @@ const SignUp = () => {
                   setFormData({ ...formData, confirmPassword: e.target.value })
                 }
               />
-              <InputRightElement>
+              <InputRightElement marginTop={'6px'}>
                 <IconButton
                   aria-label="show password"
                   onClick={handleShowPassword}
                   h="1.75rem"
+                  // my={'auto'}
                   size="sm"
                   bg={'white'}
                   _hover={{
@@ -289,9 +333,13 @@ const SignUp = () => {
           <Button
             type="submit"
             bg={'#1713f2ff'}
+            _hover={{
+              bg: '#1713f2ff',
+            }}
             color={'white'}
             mt="4"
             w="full"
+            py={'1.5rem'}
             isLoading={creatingUser}
           >
             Sign Up

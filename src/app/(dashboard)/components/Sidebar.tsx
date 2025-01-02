@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation';
 import { SidebarLinks } from '../../constants/SidebarLinks';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { IconButton, Box } from '@chakra-ui/react';
+import { IconButton, Box, Flex, Text } from '@chakra-ui/react';
 import { IoMdClose } from 'react-icons/io';
+import { signOut } from 'next-auth/react';
 
 // import Icon from '@chakra-ui/react'
 interface SidebarProps {
@@ -21,6 +22,15 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   useEffect(() => {
     setActivePath(pathname);
   }, [pathname]);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      window.location.reload();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   return (
     <Box
@@ -40,7 +50,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         lg: 'none',
       }}
       transition="transform 0.3s ease-in-out"
-      // overflowY="auto"
+      overflowY="scroll"
       // css={{
       //   '&::-webkit-scrollbar': {
       //     width: '8px',
@@ -94,13 +104,21 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 }`}
               >
                 <link.icon size={20} className="mr-2" />
-                <p>{link.name}</p>
+                <p style={{ whiteSpace: 'nowrap' }}>{link.name}</p>
               </Link>
             </li>
           );
         })}
       </ul>
       {/* </div> */}
+      <Flex
+        onClick={handleSignOut}
+        justifyContent={'center'}
+        alignItems={'center'}
+        cursor={'pointer'}
+      >
+        <Text cursor={'pointer'}>Logout</Text>
+      </Flex>
     </Box>
   );
 };
