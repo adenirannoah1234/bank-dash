@@ -1,18 +1,25 @@
+import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import './globals.css';
 
-import LayoutContainer from './layoutContainer';
+import { Provider } from '@/provider';
 const geistSans = localFont({
-  src: '../fonts/GeistVF.woff',
+  src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
   weight: '100 900',
 });
 const geistMono = localFont({
-  src: '../fonts/GeistMonoVF.woff',
+  src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
   weight: '100 900',
 });
 
-export default function AuthLayout({
+export const metadata: Metadata = {
+  title: 'BankDash',
+  description: 'BankDash is a simple and easy to use banking app',
+};
+
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -22,7 +29,7 @@ export default function AuthLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LayoutContainer>{children}</LayoutContainer>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

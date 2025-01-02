@@ -14,19 +14,73 @@ import {
   Switch,
   HStack,
   Flex,
+  useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 const page = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const toast = useToast();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const handleSignIn = async (e: any) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      });
+
+      console.log('SignIn response:', response);
+
+      if (response?.ok) {
+        toast({
+          title: 'Success',
+          description: 'Logged in successfully',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
+        // Redirect to dashboard
+        router.push('/');
+      } else if (!response?.ok) {
+        toast({
+          title: 'Error',
+          description: response?.error || 'Failed to login',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
+      }
+    } catch (error: any) {
+      console.error('Login error:', error);
+      toast({
+        title: 'Error',
+        description: error?.message || 'An error occurred',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <VStack
       maxW={{ base: '100%', md: 'md', lg: 'md' }}
@@ -46,13 +100,15 @@ const page = () => {
       <Text fontSize={'1.125rem'} mb="4" color={'#929294ff'} textAlign="center">
         Login in to your account.
       </Text>
-      <VStack spacing="6">
+      <VStack spacing="6" as={'form'} onSubmit={handleSignIn}>
         <FormControl isRequired>
           {/* <FormLabel>Email</FormLabel> */}
           <Input
             type="email"
             name="email"
             placeholder="Email"
+            py="1.5rem"
+            px="1rem"
             _placeholder={{
               color: '#595959ff',
               fontSize: '0.875rem',
@@ -73,6 +129,8 @@ const page = () => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Password"
+              py="1.5rem"
+              px="1rem"
               _placeholder={{
                 color: '#595959ff',
                 fontSize: '0.875rem',
@@ -85,7 +143,7 @@ const page = () => {
                 setFormData({ ...formData, password: e.target.value })
               }
             />
-            <InputRightElement>
+            <InputRightElement marginTop={'6px'}>
               <IconButton
                 aria-label="show password"
                 onClick={handleShowPassword}
@@ -112,11 +170,25 @@ const page = () => {
             />
             <Text ml="2">Remember me</Text>
           </Flex>
-          <Link style={{ textDecoration: 'none', color: '#db4b2eff' }} href="/">
+          <Link
+            style={{ textDecoration: 'none', color: '#db4b2eff' }}
+            href="/forgot-password"
+          >
             Recover password
           </Link>
         </HStack>
-        <Button type="submit" bg={'#1713f2ff'} color={'white'} mt="4" w="full">
+        <Button
+          type="submit"
+          bg={'#1713f2ff'}
+          _hover={{
+            bg: '#1713f2ff',
+          }}
+          color={'white'}
+          mt="4"
+          py={'1.5rem'}
+          w="full"
+          isLoading={isLoading}
+        >
           Login
         </Button>
       </VStack>
