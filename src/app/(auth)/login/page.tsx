@@ -83,11 +83,12 @@ const page = () => {
   };
   return (
     <VStack
-      maxW={{ base: '100%', md: 'md', lg: 'md' }}
+      maxW={{ base: '100%', md: 'xl', lg: 'xl' }}
       mx={'auto'}
       mt={{ base: '150px', md: '10' }}
       w={'full'}
       align={'center'}
+      px={{ base: 4, md: 8 }}
     >
       <Text
         textAlign="center"
@@ -100,7 +101,12 @@ const page = () => {
       <Text fontSize={'1.125rem'} mb="4" color={'#929294ff'} textAlign="center">
         Login in to your account.
       </Text>
-      <VStack spacing="6" as={'form'} onSubmit={handleSignIn}>
+      <VStack
+        spacing="6"
+        as={'form'}
+        onSubmit={handleSignIn}
+        w={{ base: 'full', md: 'md' }}
+      >
         <FormControl isRequired>
           {/* <FormLabel>Email</FormLabel> */}
           <Input

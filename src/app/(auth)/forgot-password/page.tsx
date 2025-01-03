@@ -2,238 +2,165 @@
 
 import React, { useState } from 'react';
 import {
-  Box,
-  Button,
-  Center,
-  // Flex,
-  Heading,
-  Input,
-  Text,
-  FormLabel,
-  FormControl,
   VStack,
+  Text,
+  Input,
+  Button,
+  FormControl,
   useToast,
-  HStack,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+import { useForgotPasswordMutation } from '@/lib/features/auth/authSlice';
+import { isFetchBaseQueryError } from '@/lib/features/api.slice';
 import Link from 'next/link';
-// import Image from "next/image";
 
-// import { ErrorResponseType } from "@/app/types/types";
-import { PinInput } from 'react-input-pin-code';
-
+// Changed from lowercase 'page' to 'ForgotPassword'
 const ForgotPassword = () => {
+  const router = useRouter();
   const toast = useToast();
 
-  const [otpValues, setOTPValues] = useState(['', '', '', '', '', '']);
+  const [formData, setFormData] = useState({
+    email: '',
+  });
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
-  //   const handleSubmit = async (e: any) => {
-  //     e.preventDefault();
+  const handleForgotPassword = async (e: any) => {
+    e.preventDefault();
+    const { email } = formData;
 
-  //     try {
-  //       if (!validateForm()) {
-  //         return;
-  //       }
-  //       setOTPValues(["", "", "", "", "", ""]);
+    if (!email) {
+      toast({
+        title: 'Error',
+        description: 'Please enter your email',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
+      return;
+    }
 
-  //       const res = await forgotPassword(values.email).unwrap();
+    try {
+      const response = await forgotPassword({ email });
+      console.log('ForgotPassword response:', response);
 
-  //       toast({
-  //         status: "success",
-  //         description: res.message,
-  //       });
-  //     } catch (error) {
-  //       if (error) {
-  //         const errorResponse = error as ErrorResponseType;
+      if ('data' in response) {
+        toast({
+          title: 'Success',
+          description: 'OTP sent to your email',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
+        router.push('/verify-otp');
+      } else if ('error' in response) {
+        let errorMessage = 'An error occurred';
 
-  //         toast({
-  //           status: "error",
-  //           description: errorResponse?.data?.message || "Something went wrong",
-  //         });
-  //       }
-  //     }
-  //   };
+        if (isFetchBaseQueryError(response.error)) {
+          const errData = response.error.data as { message: string };
+          errorMessage = errData?.message || errorMessage;
+        }
 
-  //   const handleSubmitOTP = async (e: any) => {
-  //     try {
-  //       e.preventDefault();
-
-  //       const res = await verifyOTP({
-  //         otp: otpValues.join(""),
-  //         email: values.email,
-  //       }).unwrap();
-
-  //       console.log(res);
-
-  //       toast({
-  //         title: "OTP verified",
-  //         description: res.message,
-  //         status: "success",
-  //         duration: 9000,
-  //         isClosable: true,
-  //       });
-  //     } catch (error: any) {
-  //       toast({
-  //         title: "Error validating email",
-  //         description: error.data.message,
-  //         status: "error",
-  //         duration: 9000,
-  //         isClosable: true,
-  //       });
-  //     }
-  //   };
+        toast({
+          title: 'Error',
+          description: errorMessage,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          variant: 'subtle',
+          position: 'top',
+        });
+      }
+    } catch (error: any) {
+      console.error('ForgotPassword error:', error);
+      toast({
+        title: 'Error',
+        description: error?.message || 'An error occurred',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
+    }
+  };
 
   return (
-    <VStack h={'100%'} justify={'center'} bg="transparent" minH="100vh">
-      <Center mt="10">
-        {/* {!isSuccess ? ( */}
-        <Box
-          w={['96%', '27.25rem']}
-          p={'2rem'}
-          // borderWidth={1}
-          // borderRadius={8}
-          h="33rem"
-          bg="white"
+    <VStack
+      maxW={{ base: '100%', md: 'xl', lg: 'xl' }}
+      mx={'auto'}
+      mt={{ base: '150px', md: '10' }}
+      w={'full'}
+      align={'center'}
+      px={{ base: 4, md: 8 }}
+    >
+      <Text
+        textAlign="center"
+        fontWeight="semibold"
+        fontSize={{ base: '1.15rem', md: '2.25rem' }}
+        color={'#343d6bff'}
+      >
+        Forgot Password?
+      </Text>
+      <Text
+        fontSize={{ base: '0.875rem', md: '1.125rem' }}
+        mb="4"
+        color={'#929294ff'}
+        textAlign="center"
+      >
+        We will send OTP to your email
+      </Text>
+
+      <VStack
+        spacing="6"
+        as={'form'}
+        onSubmit={handleForgotPassword}
+        w={{ base: 'full', md: 'md' }}
+      >
+        <FormControl isRequired w="full">
+          {' '}
+          <Input
+            type="email"
+            name="email"
+            w="full"
+            placeholder="Enter your email"
+            py="1.5rem"
+            px="1rem"
+            _placeholder={{
+              color: '#595959ff',
+              fontSize: '0.875rem',
+            }}
+            border={'2px solid #d9d9d9ff'}
+            _focus={{
+              borderColor: '#1713f2ff',
+            }}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+        </FormControl>
+
+        <Button
+          type="submit"
+          bg={'#1713f2ff'}
+          _hover={{
+            bg: '#1713f2ff',
+          }}
+          color={'white'}
+          mt="4"
+          py={'1.5rem'}
+          w="full"
+          isLoading={isLoading}
         >
-          <VStack gap={'1rem'} justify={'center'} h="100%">
-            <Heading
-              as="h2"
-              fontWeight="semibold"
-              fontSize={{ base: '1.5rem', md: '2rem', lg: '2.25rem' }}
-              color={'#343d6bff'}
-            >
-              Forgot Password?
-            </Heading>
-            <Text
-              textAlign="center"
-              fontSize={{ base: '0.776rem', md: '1.125rem', lg: '1.25rem' }}
-              color={'#929294ff'}
-            >
-              We will send OTP to your email
-            </Text>
-
-            <VStack as={'form'} w="100%" gap="1rem">
-              <FormControl id="email" w="100%">
-                <FormLabel w="100%" fontSize="14px" color="#121111">
-                  Email Address
-                </FormLabel>
-                <Input
-                  type="email"
-                  placeholder="Enter your Email Address"
-                  name="email"
-                  _placeholder={{
-                    color: '#595959ff',
-                    fontSize: '0.875rem',
-                  }}
-                  border={'2px solid #d9d9d9ff'}
-                  _focus={{
-                    borderColor: '#1713f2ff',
-                  }}
-                  focusBorderColor="transparent"
-                  py="1.5rem"
-                  px="1rem"
-                  w="100%"
-                  sx={{
-                    '::placeholder': {
-                      fontSize: '14px',
-                      color: 'a89f98',
-                    },
-                  }}
-                />
-              </FormControl>
-
-              <Button
-                bg="#1713f2ff"
-                color="white"
-                _hover={{ bg: '#1713f2ff' }}
-                type="submit"
-                mt={3}
-                w="100%"
-                py="1.5rem"
-              >
-                Reset Password
-              </Button>
-            </VStack>
-            <Text textAlign="center" w="100%" fontSize="12px" color="#544f4c">
-              Back to{' '}
-              <Link
-                href="/signup"
-                style={{ textDecoration: 'underline', color: '#6e30b0' }}
-              >
-                Sign in
-              </Link>
-            </Text>
-          </VStack>
-        </Box>
-        {/* ) : ( */}
-        {/* <VStack justify="center" w="100%" max-w="376px" gap="0.3rem" h="100%">
-          <VStack as="form" w="100%">
-            <Heading as="h3" textAlign="center" fontSize="20px">
-              Verify Email
-            </Heading>
-            <Text
-              textAlign="justify"
-              w="100%"
-              mt="2"
-              px="0.9"
-              fontSize="15px"
-              color="#544f4c"
-            >
-              Enter the 6-digit code sent to your email address.
-            </Text>
-
-            <Box my="1rem">
-              <PinInput
-                values={otpValues}
-                //   onChange={(value, index, values) => setOTPValues(values)}
-              />
-            </Box>
-
-            <Button
-              bg="#6e30b0"
-              color="white"
-              _hover={{ bg: '#6e30b0' }}
-              type="submit"
-              mt={3}
-              w="100%"
-              py="1.5rem"
-              // isDisabled={isLoading || !otpValues.join("")}
-              // isLoading={isLoadingVerifyOTP}
-            >
-              Continue
-            </Button>
-          </VStack>
-
-          <HStack
-            w="100%"
-            justify={'center'}
-            as="form"
-            //   onSubmit={handleSubmit}
-          >
-            <Text
-              textAlign="justify"
-              mt="2"
-              px="0.9"
-              fontSize="15px"
-              color="#544f4c"
-            >
-              Didn’t get the code?
-            </Text>
-
-            <Button
-              textAlign="justify"
-              mt="2"
-              px="0.9"
-              fontSize="15px"
-              color="#B697D7"
-              variant={'outline'}
-              type="submit"
-            >
-              Resend
-            </Button>
-          </HStack>
-        </VStack> */}
-        {/* )} */}
-      </Center>
+          Submit
+        </Button>
+        <Text color={'#343d6bff'}>
+          Back to{' '}
+          <Link color="blue.500" href="/login">
+            Login
+          </Link>
+        </Text>
+      </VStack>
     </VStack>
   );
 };
