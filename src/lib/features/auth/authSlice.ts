@@ -1,3 +1,4 @@
+import ForgotPassword from "@/app/(auth)/forgot-password/page";
 import { apiSlice } from "../api.slice";
 
 export const authSlice = apiSlice.injectEndpoints({
@@ -10,10 +11,31 @@ export const authSlice = apiSlice.injectEndpoints({
                 body: credentials,
             }),
         }),
+        forgotPassword: builder.mutation({
+            query: (email) => ({
+                url: `/forgot-password`,
+                method: "POST",
+                body: email,
+            }),
+        }),
+        verifyOtp: builder.mutation({
+            query: (credentials) => ({
+                url: `/verify-otp`,
+                method: "POST",
+                body: credentials,
+            }),
+        }),
+        resetPassword: builder.mutation({
+            query: (payload) => ({
+                url: `/reset-password`,
+                method: "POST",
+                body: payload,
+            }),
+        }),
   
 
   
     }),
 }); 
    
-export const { useCreateUserMutation } = authSlice;
+export const { useCreateUserMutation, useForgotPasswordMutation, useVerifyOtpMutation, useResetPasswordMutation } = authSlice;
