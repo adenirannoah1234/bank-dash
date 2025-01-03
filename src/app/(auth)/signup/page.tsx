@@ -121,7 +121,12 @@ const SignUp = () => {
       w={'full'}
       align={'center'}
     >
-      <VStack as={'form'} onSubmit={handleSubmit} align={'stretch'}>
+      <VStack
+        as={'form'}
+        onSubmit={handleSubmit}
+        align={'stretch'}
+        w={{ base: 'full', md: 'md' }}
+      >
         <Text
           as="h1"
           textAlign="center"
