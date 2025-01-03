@@ -113,12 +113,13 @@ const SignUp = () => {
   };
 
   return (
-    <Box
-      maxW={{ base: '100%', md: 'md', lg: 'md' }}
+    <VStack
+      maxW={{ base: '100%', md: 'xl', lg: 'xl' }}
       mx={'auto'}
       mt={{ base: '50px', md: '10' }}
-      px={{ base: '10', md: '0' }}
+      px={{ base: 4, md: 0 }}
       w={'full'}
+      align={'center'}
     >
       <VStack as={'form'} onSubmit={handleSubmit} align={'stretch'}>
         <Text
@@ -138,7 +139,7 @@ const SignUp = () => {
         >
           Getting started is easy.
         </Text>
-        <VStack spacing="4">
+        <VStack spacing="4" w={{ base: 'full', md: 'md' }}>
           <FormControl isRequired>
             {/* <FormLabel>First Name</FormLabel> */}
             <Input
@@ -344,7 +345,7 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          <Text color={'#343d6bff'}>
+          <Text color={'#343d6bff'} fontSize={'0.675rem'}>
             Already have an account?{' '}
             <Link color="blue.500" href="/login">
               Login
@@ -352,7 +353,7 @@ const SignUp = () => {
           </Text>
         </VStack>
       </VStack>
-    </Box>
+    </VStack>
   );
 };
 
