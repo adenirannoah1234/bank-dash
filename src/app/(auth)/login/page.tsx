@@ -197,6 +197,15 @@ const page = () => {
         >
           Login
         </Button>
+        <Text textAlign="center" w="100%" fontSize="12px" color="#544f4c">
+          Dont have an account?{' '}
+          <Link
+            href="/signup"
+            style={{ textDecoration: 'underline', color: '#1713f2ff' }}
+          >
+            Sign up here
+          </Link>
+        </Text>
       </VStack>
     </VStack>
   );

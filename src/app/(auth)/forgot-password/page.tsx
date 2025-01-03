@@ -156,7 +156,11 @@ const ForgotPassword = () => {
         </Button>
         <Text color={'#343d6bff'}>
           Back to{' '}
-          <Link color="blue.500" href="/login">
+          <Link
+            color="blue.500"
+            href="/login"
+            style={{ textDecoration: 'underline' }}
+          >
             Login
           </Link>
         </Text>
