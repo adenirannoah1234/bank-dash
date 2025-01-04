@@ -14,7 +14,6 @@ import { useForgotPasswordMutation } from '@/lib/features/auth/authSlice';
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
 import Link from 'next/link';
 
-// Changed from lowercase 'page' to 'ForgotPassword'
 const ForgotPassword = () => {
   const router = useRouter();
   const toast = useToast();
@@ -53,7 +52,7 @@ const ForgotPassword = () => {
           isClosable: true,
           position: 'top',
         });
-        router.push('/verify-otp');
+        router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
       } else if ('error' in response) {
         let errorMessage = 'An error occurred';
 

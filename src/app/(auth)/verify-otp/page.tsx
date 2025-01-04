@@ -18,16 +18,23 @@ import {
   PinInputField,
 } from '@chakra-ui/react';
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
+import { useSearchParams } from 'next/navigation';
 
 const VerifyOtp = () => {
   const router = useRouter();
   const toast = useToast();
   const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
+  const searchParams = useSearchParams();
+  const email = searchParams?.get('email') || '';
+  console.log('VerifyOtp email:', email);
 
   const handleComplete = async (value: string) => {
     try {
-      const res = await verifyOtp({ otp: value });
-      console.log('VerifyOtp response:', res);
+      const res = await verifyOtp({
+        otp: value,
+        email: email,
+      });
+      // console.log('VerifyOtp response:', res);
 
       if ('data' in res) {
         toast({
@@ -38,7 +45,12 @@ const VerifyOtp = () => {
           isClosable: true,
           position: 'top',
         });
-        router.push('/reset-password');
+
+        router.push(
+          `/reset-password?email=${encodeURIComponent(
+            email
+          )}&otp=${encodeURIComponent(value)}`
+        );
       } else if ('error' in res) {
         let errorMessage = 'An error occurred';
 
@@ -57,7 +69,7 @@ const VerifyOtp = () => {
         });
       }
     } catch (error) {
-      console.error('Error verifying OTP:', error);
+      // console.error('Error verifying OTP:', error);
       toast({
         title: 'Error',
         description: 'Failed to verify OTP',
@@ -97,9 +109,13 @@ const VerifyOtp = () => {
       </Text>
 
       <VStack spacing="6" w={{ base: 'full', md: '2xl' }}>
-        <HStack justify="center" spacing={{ base: 2, md: 4 }}>
+        <HStack
+          justify="center"
+          spacing={{ base: 2, md: 4 }}
+          w={{ base: 'full', md: 'lg' }}
+        >
           <PinInput
-            size={{ base: 'md', md: 'lg' }}
+            size={{ base: 'full', md: 'lg' }}
             otp
             onComplete={handleComplete}
           >
@@ -110,7 +126,7 @@ const VerifyOtp = () => {
                 _focus={{
                   borderColor: '#1713f2ff',
                 }}
-                w={{ base: '40px', md: '50px' }}
+                w={{ base: 'full', md: '50px' }}
                 h={{ base: '40px', md: '50px' }}
                 fontSize={{ base: 'lg', md: 'xl' }}
               />
@@ -127,7 +143,7 @@ const VerifyOtp = () => {
           color={'white'}
           mt="4"
           py={'1.5rem'}
-          w="70%"
+          w={{ base: 'full', md: '57%' }}
           isLoading={isLoading}
           onClick={() => {}} // This will be handled by onComplete
         >
