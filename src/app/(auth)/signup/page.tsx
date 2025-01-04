@@ -121,12 +121,7 @@ const SignUp = () => {
       w={'full'}
       align={'center'}
     >
-      <VStack
-        as={'form'}
-        onSubmit={handleSubmit}
-        align={'stretch'}
-        w={{ base: 'full', md: 'md' }}
-      >
+      <VStack as={'form'} onSubmit={handleSubmit} align={'stretch'}>
         <Text
           as="h1"
           textAlign="center"
@@ -350,9 +345,13 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          <Text color={'#343d6bff'} fontSize={'0.675rem'}>
+          <Text color={'#343d6bff'} fontSize={'1rem'} mt="2">
             Already have an account?{' '}
-            <Link color="blue.500" href="/login">
+            <Link
+              color="blue.500"
+              href="/login"
+              style={{ textDecoration: 'underline', color: '#1713f2ff' }}
+            >
               Login
             </Link>
           </Text>

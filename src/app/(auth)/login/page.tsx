@@ -197,7 +197,7 @@ const page = () => {
         >
           Login
         </Button>
-        <Text textAlign="center" w="100%" fontSize="12px" color="#544f4c">
+        <Text textAlign="center" w="100%" fontSize="1rem">
           Dont have an account?{' '}
           <Link
             href="/signup"

@@ -5,9 +5,10 @@ import { usePathname } from 'next/navigation';
 import { SidebarLinks } from '../../constants/SidebarLinks';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { IconButton, Box, Flex, Text } from '@chakra-ui/react';
+import { IconButton, Box, Flex, Text, Button } from '@chakra-ui/react';
 import { IoMdClose } from 'react-icons/io';
 import { signOut } from 'next-auth/react';
+import { AiOutlineLogout } from 'react-icons/ai';
 
 // import Icon from '@chakra-ui/react'
 interface SidebarProps {
@@ -111,14 +112,28 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         })}
       </ul>
       {/* </div> */}
-      <Flex
+      {/* <Flex
         onClick={handleSignOut}
         justifyContent={'center'}
         alignItems={'center'}
         cursor={'pointer'}
       >
         <Text cursor={'pointer'}>Logout</Text>
-      </Flex>
+      </Flex> */}
+
+      <Button
+        leftIcon={<AiOutlineLogout />}
+        onClick={handleSignOut}
+        bg={'#1713f2ff'}
+        _hover={{
+          bg: '#1713f2ff',
+        }}
+        color={'white'}
+        mt="7"
+        // py={'1.5rem'}
+      >
+        Logout
+      </Button>
     </Box>
   );
 };

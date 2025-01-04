@@ -1,7 +1,7 @@
-import VerifyOtp from './components/VerifyOtpPage';
 import { Suspense } from 'react';
+import ResetPassword from './components/ResetPasswordPage';
 
-const VerifyOtpPage = () => {
+const ResetPasswordPage = () => {
   return (
     <Suspense
       fallback={
@@ -10,8 +10,9 @@ const VerifyOtpPage = () => {
         </div>
       }
     >
-      <VerifyOtp />
+      <ResetPassword />
     </Suspense>
   );
 };
-export default VerifyOtpPage;
+
+export default ResetPasswordPage;
