@@ -111,18 +111,9 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           );
         })}
       </ul>
-      {/* </div> */}
-      {/* <Flex
-        onClick={handleSignOut}
-        justifyContent={'center'}
-        alignItems={'center'}
-        cursor={'pointer'}
-      >
-        <Text cursor={'pointer'}>Logout</Text>
-      </Flex> */}
 
       <Button
-        leftIcon={<AiOutlineLogout />}
+        leftIcon={<AiOutlineLogout size={20} />}
         onClick={handleSignOut}
         bg={'#1713f2ff'}
         _hover={{
@@ -130,6 +121,9 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         }}
         color={'white'}
         mt="7"
+        w={'70%'}
+        gap={'5px'}
+        fontSize={'1.1rem'}
         // py={'1.5rem'}
       >
         Logout
