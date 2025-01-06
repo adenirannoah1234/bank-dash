@@ -54,6 +54,7 @@ const page = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
         // Redirect to dashboard
         router.push('/');
@@ -65,6 +66,7 @@ const page = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
       }
     } catch (error: any) {
@@ -76,6 +78,7 @@ const page = () => {
         duration: 5000,
         isClosable: true,
         position: 'top',
+        variant: 'left-accent',
       });
     } finally {
       setIsLoading(false);

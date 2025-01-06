@@ -54,6 +54,7 @@ const ResetPassword = () => {
         duration: 5000,
         isClosable: true,
         position: 'top',
+        variant: 'left-accent',
       });
       return;
     }
@@ -74,6 +75,7 @@ const ResetPassword = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
         router.push('/login');
       } else if ('error' in response) {
@@ -91,6 +93,7 @@ const ResetPassword = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
       }
     } catch (error: any) {
@@ -102,6 +105,7 @@ const ResetPassword = () => {
         duration: 5000,
         isClosable: true,
         position: 'top',
+        variant: 'left-accent',
       });
     }
   };

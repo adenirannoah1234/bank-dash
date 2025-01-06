@@ -16,12 +16,17 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { Icon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconType } from 'react-icons';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { useCreateUserMutation } from '@/lib/features/auth/authSlice';
+import {
+  authSlice,
+  useCreateUserMutation,
+} from '@/lib/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
+import { useAppDispatch } from '@/lib/features/hook';
+import { setUser } from '@/lib/features/auth/auth.reducers';
 
 const initialFormData = {
   email: '',
@@ -47,6 +52,7 @@ const SignUp = () => {
     phoneNumber: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleShowPassword = () => setShowPassword(!showPassword);
   const [createUser, { isLoading: creatingUser, error: createUserError }] =
@@ -65,6 +71,10 @@ const SignUp = () => {
         phone_number: formData.phoneNumber,
       });
       console.log(response);
+
+      // useEffect(() => {
+      //   dispatch(setUser(response?.data));
+      // }, [response?.data]);
       if (response?.data) {
         toast({
           title: 'User Created',
@@ -72,7 +82,7 @@ const SignUp = () => {
           status: 'success',
           duration: 9000,
           isClosable: true,
-          variant: 'subtle',
+          variant: 'left-accent',
           position: 'top',
         });
         router.push('/login');
@@ -91,7 +101,7 @@ const SignUp = () => {
           status: 'error',
           duration: 9000,
           isClosable: true,
-          variant: 'subtle',
+          variant: 'left-accent',
           position: 'top',
         });
       }
@@ -106,7 +116,7 @@ const SignUp = () => {
         status: 'error',
         duration: 9000,
         isClosable: true,
-        variant: 'subtle',
+        variant: 'left-accent',
         position: 'top',
       });
     }
