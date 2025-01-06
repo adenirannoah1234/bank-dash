@@ -35,6 +35,7 @@ const ForgotPassword = () => {
         duration: 5000,
         isClosable: true,
         position: 'top',
+        variant: 'left-accent',
       });
       return;
     }
@@ -51,6 +52,7 @@ const ForgotPassword = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
         router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
       } else if ('error' in response) {
@@ -67,8 +69,9 @@ const ForgotPassword = () => {
           status: 'error',
           duration: 9000,
           isClosable: true,
-          variant: 'subtle',
+
           position: 'top',
+          variant: 'left-accent',
         });
       }
     } catch (error: any) {
@@ -80,6 +83,7 @@ const ForgotPassword = () => {
         duration: 5000,
         isClosable: true,
         position: 'top',
+        variant: 'left-accent',
       });
     }
   };

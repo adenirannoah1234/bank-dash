@@ -44,6 +44,7 @@ const VerifyOtp = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
 
         router.push(
@@ -66,6 +67,7 @@ const VerifyOtp = () => {
           duration: 5000,
           isClosable: true,
           position: 'top',
+          variant: 'left-accent',
         });
       }
     } catch (error) {
@@ -77,6 +79,7 @@ const VerifyOtp = () => {
         duration: 5000,
         isClosable: true,
         position: 'top',
+        variant: 'left-accent',
       });
     }
   };
