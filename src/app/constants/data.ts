@@ -200,3 +200,30 @@ export const ServiceList = [
         
     }
 ]
+
+export const AccountHeaderList = [
+    {
+        id: 1,
+        name: 'My Balance',
+        amount: '$12,750',
+        image: '/my-balance.svg'
+    },
+    {
+        id: 2,
+        name: 'Income',
+        amount: '$5,600',
+        image: '/income.svg'
+    },
+    {
+        id: 3,
+        name: 'Expense',
+        amount: '$3.460',
+        image: '/expense.png'
+    },
+    {
+        id: 4,
+        name: 'Total Saving',
+        amount: '$7,920',
+        image: '/total-saving.png'
+    },
+]
