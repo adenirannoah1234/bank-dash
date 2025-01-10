@@ -32,10 +32,25 @@ export const authSlice = apiSlice.injectEndpoints({
                 body: payload,
             }),
         }),
+        getUserDetails: builder.query({
+            query: () => ({
+                url: `/user`,
+                method: "GET",
+            }),
+        }),
+        updateUserDetails: builder.mutation({
+            query: (payload) => ({
+                url: `/user`,
+                method: "PUT",
+                body: payload,
+            }),
+        }),
+           
+          
   
 
   
     }),
 }); 
    
-export const { useCreateUserMutation, useForgotPasswordMutation, useVerifyOtpMutation, useResetPasswordMutation } = authSlice;
+export const { useCreateUserMutation, useForgotPasswordMutation, useVerifyOtpMutation, useResetPasswordMutation, useGetUserDetailsQuery, useUpdateUserDetailsMutation } = authSlice;
