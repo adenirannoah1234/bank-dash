@@ -16,7 +16,7 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { Icon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { IconType } from 'react-icons';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import {
@@ -50,6 +50,12 @@ const SignUp = () => {
     lastName: '',
     address: '',
     phoneNumber: '',
+    dateOfBirth: '',
+    city: '',
+    postalCode: '',
+    country: '',
+    presentAddress: '',
+    userName: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
@@ -69,16 +75,19 @@ const SignUp = () => {
         last_name: formData.lastName,
         house_address: formData.address,
         phone_number: formData.phoneNumber,
-      });
-      console.log(response);
+        date_of_birth: formData.dateOfBirth,
+        city: formData.city,
+        postal_code: formData.postalCode,
+        country: formData.country,
+        present_address: formData.presentAddress,
+        username: formData.userName,
+      }).unwrap();
 
-      // useEffect(() => {
-      //   dispatch(setUser(response?.data));
-      // }, [response?.data]);
-      if (response?.data) {
+      // Success case
+      if (response) {
         toast({
-          title: 'User Created',
-          description: response?.data?.message || 'User created successfully',
+          title: 'Success',
+          description: response.message || 'User created successfully',
           status: 'success',
           duration: 9000,
           isClosable: true,
@@ -86,33 +95,29 @@ const SignUp = () => {
           position: 'top',
         });
         router.push('/login');
-      } else if (response?.error) {
-        let errorMessage = 'An error occurred';
-
-        if (isFetchBaseQueryError(response.error)) {
-          // Access error as FetchBaseQueryError
-          const errData = response.error.data as { message: string };
-          errorMessage = errData?.message || errorMessage;
-        }
-
+        return;
+      }
+    } catch (error: any) {
+      // Handle RTK Query errors
+      if (isFetchBaseQueryError(error)) {
+        const errMsg =
+          (error.data as { message: string })?.message || 'An error occurred';
         toast({
           title: 'Error',
-          description: errorMessage,
+          description: errMsg,
           status: 'error',
           duration: 9000,
           isClosable: true,
           variant: 'left-accent',
           position: 'top',
         });
+        return;
       }
-    } catch (error: any) {
-      console.log('Full error:', error);
-      console.log('Error data:', error.data);
-      console.log('Error message:', error.data?.message);
 
+      // Handle other errors
       toast({
         title: 'Error',
-        description: error?.message || 'An error occurred',
+        description: error?.message || 'An unexpected error occurred',
         status: 'error',
         duration: 9000,
         isClosable: true,
@@ -121,7 +126,6 @@ const SignUp = () => {
       });
     }
   };
-
   return (
     <VStack
       maxW={{ base: '100%', md: 'xl', lg: 'xl' }}
@@ -198,6 +202,27 @@ const SignUp = () => {
             />
           </FormControl>
           <FormControl isRequired>
+            {/* <FormLabel>Last Name</FormLabel> */}
+            <Input
+              type="text"
+              name="userName"
+              py="1.5rem"
+              px="1rem"
+              placeholder="User Name"
+              _placeholder={{
+                color: '#595959ff',
+                fontSize: '0.875rem',
+              }}
+              border={'2px solid #d9d9d9ff'}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, userName: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl isRequired>
             {/* <FormLabel>Email</FormLabel> */}
             <Input
               type="email"
@@ -221,6 +246,27 @@ const SignUp = () => {
           <FormControl isRequired>
             {/* <FormLabel>Address</FormLabel> */}
             <Input
+              type="date"
+              name="dateOfBirth"
+              placeholder="Date of Birth"
+              _placeholder={{
+                color: '#595959ff',
+                fontSize: '0.875rem',
+              }}
+              py="1.5rem"
+              px="1rem"
+              border={'2px solid #d9d9d9ff'}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, dateOfBirth: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl isRequired>
+            {/* <FormLabel>Address</FormLabel> */}
+            <Input
               type="text"
               name="address"
               placeholder="Address"
@@ -236,6 +282,90 @@ const SignUp = () => {
               }}
               onChange={(e) =>
                 setFormData({ ...formData, address: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl isRequired>
+            {/* <FormLabel>Address</FormLabel> */}
+            <Input
+              type="text"
+              name="presentAddress"
+              placeholder="Present Address"
+              _placeholder={{
+                color: '#595959ff',
+                fontSize: '0.875rem',
+              }}
+              py="1.5rem"
+              px="1rem"
+              border={'2px solid #d9d9d9ff'}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, presentAddress: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl isRequired>
+            {/* <FormLabel>Address</FormLabel> */}
+            <Input
+              type="text"
+              name="city"
+              placeholder="City"
+              _placeholder={{
+                color: '#595959ff',
+                fontSize: '0.875rem',
+              }}
+              py="1.5rem"
+              px="1rem"
+              border={'2px solid #d9d9d9ff'}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, city: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl isRequired>
+            {/* <FormLabel>Address</FormLabel> */}
+            <Input
+              type="text"
+              name="postalCode"
+              placeholder="Postal Code"
+              _placeholder={{
+                color: '#595959ff',
+                fontSize: '0.875rem',
+              }}
+              py="1.5rem"
+              px="1rem"
+              border={'2px solid #d9d9d9ff'}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, postalCode: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl isRequired>
+            {/* <FormLabel>Address</FormLabel> */}
+            <Input
+              type="text"
+              name="country"
+              placeholder="Country"
+              _placeholder={{
+                color: '#595959ff',
+                fontSize: '0.875rem',
+              }}
+              py="1.5rem"
+              px="1rem"
+              border={'2px solid #d9d9d9ff'}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              onChange={(e) =>
+                setFormData({ ...formData, country: e.target.value })
               }
             />
           </FormControl>
