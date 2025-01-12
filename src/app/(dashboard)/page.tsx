@@ -17,9 +17,13 @@ import DashboardPieChart from './components/charts/DashboardPieChart';
 import DashboardSplineChart from './components/charts/DashboardSplineChart';
 import SendFunds from './components/QuickTransfer';
 import { Search } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 // import PieCharts from './components/PieCharts';
 
 export default function Home() {
+  // const { data: session } = useSession();
+  // const token = session?.user?.token;
+  // console.log('token', token);
   return (
     <VStack
       align={'stretch'}

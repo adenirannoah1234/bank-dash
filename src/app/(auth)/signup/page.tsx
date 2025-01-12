@@ -25,8 +25,6 @@ import {
 } from '@/lib/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
-import { useAppDispatch } from '@/lib/features/hook';
-import { setUser } from '@/lib/features/auth/auth.reducers';
 
 const initialFormData = {
   email: '',
@@ -58,7 +56,6 @@ const SignUp = () => {
     userName: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useAppDispatch();
 
   const handleShowPassword = () => setShowPassword(!showPassword);
   const [createUser, { isLoading: creatingUser, error: createUserError }] =
@@ -98,7 +95,6 @@ const SignUp = () => {
         return;
       }
     } catch (error: any) {
-      // Handle RTK Query errors
       if (isFetchBaseQueryError(error)) {
         const errMsg =
           (error.data as { message: string })?.message || 'An error occurred';

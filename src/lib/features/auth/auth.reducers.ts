@@ -1,29 +1,31 @@
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { User } from 'next-auth';
-
 interface AuthState {
-  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
-  user: null,
+  token: null,
+  isAuthenticated: false,
 };
 
-export const authSlice = createSlice({
-  name: 'auth',
+const authStateSlice = createSlice({
+  name: 'authState',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User | null>) => {
-      state.user = action.payload;
-      },
-      logoutUser: (state) => {
-        state.user = null;
-      },
+    setCredentials: (state, action: PayloadAction<{ token: string }>) => {
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
     },
-  
+    logout: (state) => {
+      state.token = null;
+      state.isAuthenticated = false;
+    },
+  },
 });
 
-export const { setUser, logoutUser } = authSlice.actions;
+export const { setCredentials, logout } = authStateSlice.actions;
+export default authStateSlice.reducer;
 
-export default authSlice.reducer;

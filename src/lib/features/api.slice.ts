@@ -6,11 +6,28 @@ import {
   createApi,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
+// import { Session } from "next-auth";
+import { RootState } from "../store";
+
+import { useSession } from "next-auth/react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
+
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
+  prepareHeaders: (headers, { getState }) => {
+    // i'm getting the  token from Redux state, the token that was set in the setCredentials action from sessionSync.ts
+    const token = (getState() as RootState).authState.token;
+    // console.log('token', token);
+    
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+    return headers;
+
+  },
+  
   
 });
 
