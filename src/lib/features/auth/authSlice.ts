@@ -1,6 +1,7 @@
 import ForgotPassword from "@/app/(auth)/forgot-password/page";
 import { apiSlice } from "../api.slice";
 
+
 export const authSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
    
@@ -36,6 +37,7 @@ export const authSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: `/user`,
                 method: "GET",
+                
             }),
         }),
         updateUserDetails: builder.mutation({
