@@ -17,6 +17,7 @@
     "axios": "^1.7.9",
     "embla-carousel": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
+    "formik": "^2.4.6",
     "framer-motion": "^11.14.1",
     "icons": "^1.0.0",
     "lucide-react": "^0.468.0",
@@ -29,7 +30,8 @@
     "react-input-pin-code": "^1.2.1",
     "react-loader-spinner": "^6.1.6",
     "react-redux": "^9.2.0",
-    "recharts": "^2.14.1"
+    "recharts": "^2.14.1",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/node": "^20",
