@@ -110,15 +110,15 @@ export const ColumnChart = () => {
       ];
       
   return (
-    <div className="my-10 grid grid-cols-1 xl:grid-cols-3 gap-10">
-      <div className='col-span-2'>
+    <div className="my-10 md:grid grid-cols-4 xl:grid-cols-3 gap-10">
+      <div className='md:col-span-2'>
         <h2 className="text-2xl font-semibold mb-6 text-[#333B69]">Debit & Credit Overview</h2>
         <div className='bg-white py-1 rounded-2xl shadow-md'>
             <Chart options={debitAndCreditOptions} series={debitAndCreditSeries} type="bar" height={350} />
         </div>
       </div>
 
-      <div className='col-span-1 max-w-md'>
+      <div className='md:col-span-2 xl:col-span-1 max-w-md'>
         <h2 className="text-2xl font-semibold mb-6 text-[#333B69]">Invoices Sent</h2>
         <div className="bg-white p-6 rounded-2xl shadow-md max-w-sm sm:max-w-md">
         <div>

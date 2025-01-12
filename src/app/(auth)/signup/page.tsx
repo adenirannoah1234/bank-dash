@@ -27,6 +27,8 @@ import { useRouter } from 'next/navigation';
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
 import { useAppDispatch } from '@/lib/features/hook';
 import { setUser } from '@/lib/features/auth/auth.reducers';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { userSchema } from '@/lib/Validations/SignUpValidation';
 
 const initialFormData = {
   email: '',
@@ -41,22 +43,6 @@ const initialFormData = {
 const SignUp = () => {
   const toast = useToast();
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-
-    firstName: '',
-    lastName: '',
-    address: '',
-    phoneNumber: '',
-    dateOfBirth: '',
-    city: '',
-    postalCode: '',
-    country: '',
-    presentAddress: '',
-    userName: '',
-  });
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -64,23 +50,23 @@ const SignUp = () => {
   const [createUser, { isLoading: creatingUser, error: createUserError }] =
     useCreateUserMutation();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async (values: any, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+    setSubmitting(true);    
 
     try {
       const response = await createUser({
-        email: formData.email,
-        password: formData.password,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        house_address: formData.address,
-        phone_number: formData.phoneNumber,
-        date_of_birth: formData.dateOfBirth,
-        city: formData.city,
-        postal_code: formData.postalCode,
-        country: formData.country,
-        present_address: formData.presentAddress,
-        username: formData.userName,
+        email: values.email,
+        password: values.password,
+        first_name: values.firstName,
+        last_name: values.lastName,
+        house_address: values.address,
+        phone_number: values.phoneNumber,
+        date_of_birth: values.dateOfBirth,
+        city: values.city,
+        postal_code: values.postalCode,
+        country: values.country,
+        present_address: values.presentAddress,
+        username: values.userName,
       }).unwrap();
 
       // Success case
@@ -127,6 +113,13 @@ const SignUp = () => {
     }
   };
   return (
+    <Formik
+      initialValues={{firstName: '', lastName: '', userName: '', dateOfBirth: '', email: '', address: '', presentAddress: '', postalCode: '', city: '', country: '', phoneNumber: '', password: '', confirmPassword: ''}}
+      validationSchema={userSchema}
+      onSubmit={handleSubmit}
+    >
+    {({ isSubmitting, errors, touched }) => (
+  <Form>
     <VStack
       maxW={{ base: '100%', md: 'xl', lg: 'xl' }}
       mx={'auto'}
@@ -135,12 +128,12 @@ const SignUp = () => {
       w={'full'}
       align={'center'}
     >
-      <VStack
+      {/* <VStack
         as={'form'}
         onSubmit={handleSubmit}
         align={'stretch'}
         w={{ base: 'full', md: 'md' }}
-      >
+      > */}
         <Text
           as="h1"
           textAlign="center"
@@ -159,10 +152,11 @@ const SignUp = () => {
           Getting started is easy.
         </Text>
         <VStack spacing="4" w={{ base: 'full', md: 'md' }}>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.firstName && !!errors.firstName)}>
             {/* <FormLabel>First Name</FormLabel> */}
-            <Input
+            <Field
               type="text"
+              as={Input}
               border={'2px solid #d9d9d9ff'}
               _focus={{
                 borderColor: '#1713f2ff',
@@ -175,16 +169,18 @@ const SignUp = () => {
                 color: '#595959ff',
                 fontSize: '0.875rem',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, firstName: e.target.value })
+              // }
             />
+            <ErrorMessage name="firstName" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.lastName && !!errors.lastName)}>
             {/* <FormLabel>Last Name</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="lastName"
+              as={Input}
               py="1.5rem"
               px="1rem"
               placeholder="Last Name"
@@ -196,16 +192,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, lastName: e.target.value })
+              // }
             />
+            <ErrorMessage name="lastName" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.userName && !!errors.userName)}>
             {/* <FormLabel>Last Name</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="userName"
+              as={Input}
               py="1.5rem"
               px="1rem"
               placeholder="User Name"
@@ -217,16 +215,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, userName: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, userName: e.target.value })
+              // }
             />
+            <ErrorMessage name="userName" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.email && !!errors.email)}>
             {/* <FormLabel>Email</FormLabel> */}
-            <Input
+            <Field
               type="email"
               name="email"
+              as={Input}
               placeholder="Email"
               py="1.5rem"
               px="1rem"
@@ -238,16 +238,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, email: e.target.value })
+              // }
             />
+            <ErrorMessage name="email" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.dateOfBirth && !!errors.dateOfBirth)}>
             {/* <FormLabel>Address</FormLabel> */}
-            <Input
+            <Field
               type="date"
               name="dateOfBirth"
+              as={Input}
               placeholder="Date of Birth"
               _placeholder={{
                 color: '#595959ff',
@@ -259,16 +261,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, dateOfBirth: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, dateOfBirth: e.target.value })
+              // }
             />
+          <ErrorMessage name="dateOfBirth" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.address && !!errors.address)}>
             {/* <FormLabel>Address</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="address"
+              as={Input}
               placeholder="Address"
               _placeholder={{
                 color: '#595959ff',
@@ -280,16 +284,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, address: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, address: e.target.value })
+              // }
             />
+          <ErrorMessage name="address" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.presentAddress && !!errors.presentAddress)}>
             {/* <FormLabel>Address</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="presentAddress"
+              as={Input}
               placeholder="Present Address"
               _placeholder={{
                 color: '#595959ff',
@@ -301,16 +307,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, presentAddress: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, presentAddress: e.target.value })
+              // }
             />
+            <ErrorMessage name="presentAddress" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.city && !!errors.city)}>
             {/* <FormLabel>Address</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="city"
+              as={Input}
               placeholder="City"
               _placeholder={{
                 color: '#595959ff',
@@ -322,16 +330,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, city: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, city: e.target.value })
+              // }
             />
+            <ErrorMessage name="city" component="div" className='text-xs'/>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.postalCode && !!errors.postalCode)}>
             {/* <FormLabel>Address</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="postalCode"
+              as={Input}
               placeholder="Postal Code"
               _placeholder={{
                 color: '#595959ff',
@@ -343,16 +353,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, postalCode: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, postalCode: e.target.value })
+              // }
             />
+            <ErrorMessage name="postalCode" component="div" className='text-xs'/>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.country && !!errors.country)}>
             {/* <FormLabel>Address</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="country"
+              as={Input}
               placeholder="Country"
               _placeholder={{
                 color: '#595959ff',
@@ -364,16 +376,18 @@ const SignUp = () => {
               _focus={{
                 borderColor: '#1713f2ff',
               }}
-              onChange={(e) =>
-                setFormData({ ...formData, country: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, country: e.target.value })
+              // }
             />
+            <ErrorMessage name="country" component="div" className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.phoneNumber && !!errors.phoneNumber)}>
             {/* <FormLabel>Phone Number</FormLabel> */}
-            <Input
+            <Field
               type="text"
               name="phoneNumber"
+              as={Input}
               placeholder="Phone Number"
               _placeholder={{
                 color: '#595959ff',
@@ -385,18 +399,20 @@ const SignUp = () => {
               }}
               py="1.5rem"
               px="1rem"
-              onChange={(e) =>
-                setFormData({ ...formData, phoneNumber: e.target.value })
-              }
+              // onChange={(e) =>
+              //   setFormData({ ...formData, phoneNumber: e.target.value })
+              // }
             />
+            <ErrorMessage name="phoneNumber" component='div' className='text-xs' />
           </FormControl>
 
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.password && !!errors.password)}>
             {/* <FormLabel>Password</FormLabel> */}
             <InputGroup>
-              <Input
+              <Field
                 type={showPassword ? 'text' : 'password'}
                 name="password"
+                as={Input}
                 placeholder="Password"
                 _placeholder={{
                   color: '#595959ff',
@@ -408,9 +424,9 @@ const SignUp = () => {
                 }}
                 py="1.5rem"
                 px="1rem"
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
+                // onChange={(e) =>
+                //   setFormData({ ...formData, password: e.target.value })
+                // }
               />
               <InputRightElement marginTop={'6px'}>
                 <IconButton
@@ -432,13 +448,15 @@ const SignUp = () => {
                 />
               </InputRightElement>
             </InputGroup>
+            <ErrorMessage name="password" component='div' className='text-xs' />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isInvalid={!!(touched.confirmPassword && !!errors.confirmPassword)}>
             {/* <FormLabel>Confirm Password</FormLabel> */}
             <InputGroup>
-              <Input
+              <Field
                 type={showPassword ? 'text' : 'password'}
                 name="confirmPassword"
+                as={Input}
                 placeholder="Confirm Password"
                 _placeholder={{
                   color: '#595959ff',
@@ -450,9 +468,9 @@ const SignUp = () => {
                 _focus={{
                   borderColor: '#1713f2ff',
                 }}
-                onChange={(e) =>
-                  setFormData({ ...formData, confirmPassword: e.target.value })
-                }
+                // onChange={(e) =>
+                //   setFormData({ ...formData, confirmPassword: e.target.value })
+                // }
               />
               <InputRightElement marginTop={'6px'}>
                 <IconButton
@@ -475,6 +493,7 @@ const SignUp = () => {
                 />
               </InputRightElement>
             </InputGroup>
+            <ErrorMessage name="confirmPassword" component='div' className='text-xs' />
           </FormControl>
           <Button
             type="submit"
@@ -486,7 +505,8 @@ const SignUp = () => {
             mt="4"
             w="full"
             py={'1.5rem'}
-            isLoading={creatingUser}
+            isLoading={isSubmitting} 
+            loadingText="Submitting"
           >
             Sign Up
           </Button>
@@ -501,8 +521,11 @@ const SignUp = () => {
             </Link>
           </Text>
         </VStack>
-      </VStack>
+      {/* </VStack> */}
     </VStack>
+    </Form>
+    )}
+    </Formik>
   );
 };
 

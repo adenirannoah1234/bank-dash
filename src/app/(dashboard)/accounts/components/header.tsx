@@ -5,7 +5,7 @@ import React from 'react'
 export const AccountHeader = () => {
   return (
     <div>
-        <div className="grid gap-4 grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 grid-cols-2 lg:gap-2 lg:grid-cols-4">
             {AccountHeaderList.map((list) => (
                 <div key={list.id} className="flex gap-3 items-center bg-white p-4 rounded-lg shadow-md">
                     <Image src={list.image} alt={list.name} width={60} height={60} className="w-10 h-10 sm:w-12 sm:h-12"/>
