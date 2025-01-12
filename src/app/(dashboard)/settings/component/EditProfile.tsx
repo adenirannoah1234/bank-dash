@@ -31,44 +31,35 @@ const EditProfile = () => {
     useUpdateUserDetailsMutation();
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    userName: '',
     email: '',
-    dateOfBirth: '',
-    city: '',
-    postalCode: '',
-    country: '',
-    presentAddress: '',
     password: '',
-    paymentAddress: '',
+    first_name: '',
+    last_name: '',
+    house_address: '',
+    phone_number: '',
+    date_of_birth: '',
+    city: '',
+    postal_code: '',
+    country: '',
+    present_address: '',
+    username: '',
   });
-  // email: formData.email,
-  //         password: formData.password,
-  //         first_name: formData.firstName,
-  //         last_name: formData.lastName,
-  //         house_address: formData.address,
-  //         phone_number: formData.phoneNumber,
-  //         date_of_birth: formData.dateOfBirth,
-  //         city: formData.city,
-  //         postal_code: formData.postalCode,
-  //         country: formData.country,
-  //         present_address: formData.presentAddress,
-  //         username: formData.userName,
+
   //  populating user details from the data fetched from the getUserDetails endpoint
   useEffect(() => {
     if (userDetails) {
       setFormData({
-        firstName: userDetails.firstName || '',
-        lastName: userDetails.lastName || '',
-        userName: userDetails.userName || '',
+        first_name: userDetails.first_name || '',
+        last_name: userDetails.last_name || '',
+        username: userDetails.username || '',
         email: userDetails.email || '',
-        dateOfBirth: userDetails.dateOfBirth || '',
+        date_of_birth: userDetails.date_of_birth || '',
         city: userDetails.city || '',
-        postalCode: userDetails.postalCode || '',
+        postal_code: userDetails.postal_code || '',
         country: userDetails.country || '',
-        presentAddress: userDetails.presentAddress || '',
-        paymentAddress: userDetails.paymentAddress || '',
+        present_address: userDetails.present_address || '',
+        house_address: userDetails.house_address || '',
+        phone_number: userDetails.phone_number || '',
         password: '',
       });
     }
@@ -149,7 +140,7 @@ const EditProfile = () => {
             <Input
               type="text"
               placeholder="First Name"
-              value={formData.firstName}
+              value={formData.first_name}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -169,7 +160,7 @@ const EditProfile = () => {
             <Input
               type="text"
               placeholder="Last Name"
-              value={formData.lastName}
+              value={formData.last_name}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -210,7 +201,7 @@ const EditProfile = () => {
             <Input
               type="date"
               placeholder="Date of Birth"
-              value={formData.dateOfBirth}
+              value={formData.date_of_birth}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -229,8 +220,8 @@ const EditProfile = () => {
             <FormLabel>Payment Address</FormLabel>
             <Input
               type="text"
-              placeholder="Payment Address"
-              value={formData.paymentAddress}
+              placeholder="House Address"
+              value={formData.house_address}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -250,7 +241,7 @@ const EditProfile = () => {
             <Input
               type="text"
               placeholder="Postal Code"
-              value={formData.postalCode}
+              value={formData.postal_code}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -272,7 +263,7 @@ const EditProfile = () => {
             <Input
               type="text"
               placeholder="User Name"
-              value={formData.userName}
+              value={formData.username}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -287,33 +278,13 @@ const EditProfile = () => {
               borderRadius={'10px'}
             />
           </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-              border={'2px solid #edf3f7ff'}
-              py="1rem"
-              px="1rem"
-              readOnly
-              _placeholder={{
-                color: '#718ebfff',
-                fontSize: '0.9375rem',
-              }}
-              _focus={{
-                borderColor: '#1713f2ff',
-              }}
-              borderRadius={'10px'}
-            />
-          </FormControl>
+
           <FormControl>
             <FormLabel>Present Address</FormLabel>
             <Input
               type="text"
               placeholder="Present Address"
-              value={formData.presentAddress}
+              value={formData.present_address}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
@@ -354,6 +325,26 @@ const EditProfile = () => {
               type="text"
               placeholder="Country"
               value={formData.country}
+              onChange={handleInputChange}
+              border={'2px solid #edf3f7ff'}
+              py="1rem"
+              px="1rem"
+              _placeholder={{
+                color: '#718ebfff',
+                fontSize: '0.9375rem',
+              }}
+              _focus={{
+                borderColor: '#1713f2ff',
+              }}
+              borderRadius={'10px'}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Country</FormLabel>
+            <Input
+              type="number"
+              placeholder="Phone Number"
+              value={formData.phone_number}
               onChange={handleInputChange}
               border={'2px solid #edf3f7ff'}
               py="1rem"
