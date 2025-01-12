@@ -25,8 +25,7 @@ import {
 } from '@/lib/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
-import { useAppDispatch } from '@/lib/features/hook';
-import { setUser } from '@/lib/features/auth/auth.reducers';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { userSchema } from '@/lib/Validations/SignUpValidation';
 
@@ -133,7 +132,7 @@ const SignUp = () => {
       validationSchema={userSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting, errors, touched }) => (
+      {({ isSubmitting, errors, touched }: any) => (
         <Form>
           <VStack
             maxW={{ base: '100%', md: 'xl', lg: 'xl' }}
