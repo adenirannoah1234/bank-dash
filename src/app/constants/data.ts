@@ -227,3 +227,23 @@ export const AccountHeaderList = [
         image: '/total-saving.png'
     },
 ]
+export const InvestmentHeaderList = [
+    {
+        id: 1,
+        name: 'Total Invested Amount',
+        amount: '$150,000',
+        image: '/moneyBag.svg'
+    },
+    {
+        id: 2,
+        name: 'Number of Investments',
+        amount: '$1,250',
+        image: '/noOfInvestments.svg'
+    },
+    {
+        id: 3,
+        name: 'Rate of Return',
+        amount: '+5.80%',
+        image: '/rateOfReturn.svg'
+    },
+]
