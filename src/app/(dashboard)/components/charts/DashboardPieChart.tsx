@@ -91,7 +91,7 @@ const ExpensePieChart = () => {
       >
         Expense Statistics
       </Heading>
-      <Box
+      <VStack
         bg="white"
         minW="350px"
         h={{ base: '350px', lg: '323px' }}
@@ -104,10 +104,10 @@ const ExpensePieChart = () => {
           options={chartData.options}
           series={chartData.series}
           type="pie"
-          width="350"
+          minW="350"
           height="323"
         />
-      </Box>
+      </VStack>
     </Box>
   );
 };

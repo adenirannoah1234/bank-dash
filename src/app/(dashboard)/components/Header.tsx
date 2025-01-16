@@ -30,7 +30,7 @@ const Header = () => {
           <Image src="/white.png" alt="white" width={350} height={235} />
         </Flex>
       </Box>
-      <Box w={{ base: '100%', lg: '350px' }} h={'239px'}>
+      <Box minW={{ base: '100%', lg: '350px' }} h={'239px'}>
         <Text fontWeight={'semibold'} fontSize={'1.375rem'}>
           Recent Transactions
         </Text>

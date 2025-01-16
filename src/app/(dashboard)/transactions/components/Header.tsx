@@ -41,11 +41,11 @@ const Header = () => {
             scrollbarWidth: 'none',
           }}
         >
-          <Image src="/blue.png" alt="blue" width={350} height={225} />
-          <Image src="/white.png" alt="white" width={350} height={225} />
+          <Image src="/blue.png" alt="blue" width={350} height={305} />
+          <Image src="/white.png" alt="white" width={350} height={305} />
         </Flex>
       </Box>
-      <Box w={{ base: '100%', lg: '350px' }} h={'225px'}>
+      <Box minW={{ base: '100%', lg: '350px' }} h={'225px'}>
         <Text fontWeight={'semibold'} fontSize={'1.375rem'} color={'#343d6bff'}>
           My Expenses
         </Text>
