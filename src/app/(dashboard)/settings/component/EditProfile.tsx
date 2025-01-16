@@ -22,7 +22,6 @@ import {
   useGetUserDetailsQuery,
   useUpdateUserDetailsMutation,
 } from '@/lib/features/auth/authSlice';
-// import { EmptyState } from '@/components/ui/empty-state';
 
 const EditProfile = () => {
   const toast = useToast();
