@@ -58,10 +58,13 @@ export default function SendFunds() {
   }, [emblaApi, onSelect]);
 
   return (
-    <Box maxWidth={{ base: '100%', md: '445px' }} margin="auto">
+    <Box
+      maxWidth={{ base: '100%', md: '445px', lg: '500px', xl: '600px' }}
+      margin="auto"
+    >
       <Heading
         as="h3"
-        fontSize={{ base: '1.25rem', md: '1.375rem' }} // Responsive font size
+        fontSize={{ base: '1.25rem', md: '1.375rem' }}
         fontWeight={'semibold'}
         mb={4}
         color={'#343d6bff'}

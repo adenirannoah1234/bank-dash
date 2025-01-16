@@ -77,7 +77,7 @@ const DashboardSplineChart = () => {
   };
 
   return (
-    <Box width={{ base: '100%', lg: '635px' }}>
+    <Box minW={{ base: '100%', lg: '500px', xl: '600px' }}>
       <Heading
         as="h3"
         fontSize={'1.375rem'}

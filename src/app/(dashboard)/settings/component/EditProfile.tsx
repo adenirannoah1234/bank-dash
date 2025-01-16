@@ -102,7 +102,7 @@ const EditProfile = () => {
   };
   if (isLoading) {
     return (
-      <Flex w="100vw" h="100vh" justify="center" align="center">
+      <Flex justify="center" align="center">
         <BallTriangle width="100" color="#1713f2ff" radius={5} />
       </Flex>
     );

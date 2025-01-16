@@ -63,7 +63,7 @@ export default function Home() {
         alignItems={'center'}
         justifyContent={'center'}
       >
-        <Box w={{ base: '100%', lg: '650px' }}>
+        <Box minW={{ base: '100%', lg: '600px' }}>
           <DashboardBarChart />
         </Box>
         <Box w={{ base: '100%', lg: '350px' }}>
