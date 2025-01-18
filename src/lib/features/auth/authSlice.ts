@@ -45,6 +45,9 @@ export const authSlice = apiSlice.injectEndpoints({
                 url: `/user`,
                 method: "PUT",
                 body: payload,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }),
         }),
            
