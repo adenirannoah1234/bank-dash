@@ -14,6 +14,7 @@ import { TbSettings } from 'react-icons/tb';
 import { BellDot, Search } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { useAppSelector } from '@/lib/features/hook';
 
 interface TopNavProps {
   onMenuClick: () => void;

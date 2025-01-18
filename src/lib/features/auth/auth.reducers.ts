@@ -1,4 +1,5 @@
 
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AuthState {
@@ -28,4 +29,3 @@ const authStateSlice = createSlice({
 
 export const { setCredentials, logout } = authStateSlice.actions;
 export default authStateSlice.reducer;
-
