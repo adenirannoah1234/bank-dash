@@ -5,53 +5,88 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <HStack
-      align={'stretch'}
-      w={'full'}
-      spacing={6}
-      flexDirection={{ base: 'column', lg: 'row' }}
-    >
-      <Box>
-        <Flex justifyContent={'space-between'}>
-          <Text
-            fontWeight={'semibold'}
-            fontSize={'1.375rem'}
-            color={'#343d6bff'}
-          >
+    <Flex w="full" gap={6} direction={{ base: 'column', lg: 'row' }}>
+      {/* Cards Section */}
+      <Box flex="1" w="full">
+        <Flex justifyContent="space-between" mb={4}>
+          <Text fontWeight="semibold" fontSize="1.375rem" color="#343d6bff">
             My Cards
           </Text>
-          <Text
-            fontWeight={'semibold'}
-            fontSize={'1.0625rem'}
-            color={'#343d6bff'}
-          >
+          <Text fontWeight="semibold" fontSize="1.0625rem" color="#343d6bff">
             + Add Card
           </Text>
         </Flex>
-        <Flex
-          gap={6}
-          mt={4}
-          align={'center'}
-          overflowX={'scroll'}
+        <Box
+          w="full"
+          overflowX={{ base: 'scroll', lg: 'hidden' }}
           overflowY={{ base: 'hidden', md: 'visible' }}
           sx={{
             '&::-webkit-scrollbar': {
               display: 'none',
             },
             scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
           }}
         >
-          <Image src="/blue.png" alt="blue" width={350} height={305} />
-          <Image src="/white.png" alt="white" width={350} height={305} />
-        </Flex>
+          <Flex
+            gap={6}
+            w={{ base: 'max-content', lg: 'full' }}
+            direction={{ base: 'row', lg: 'row' }}
+            justify={{ lg: 'space-between' }}
+          >
+            <Box
+              position="relative"
+              minW={{ base: '350px', lg: '48%' }}
+              h={{ base: '305px', lg: '305px' }}
+            >
+              <Image
+                src="/blue.png"
+                alt="blue"
+                width={350}
+                height={305}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                }}
+              />
+            </Box>
+            <Box
+              position="relative"
+              minW={{ base: '350px', lg: '48%' }}
+              h={{ base: '305px', lg: '305px' }}
+            >
+              <Image
+                src="/white.png"
+                alt="white"
+                width={350}
+                height={305}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                }}
+              />
+            </Box>
+          </Flex>
+        </Box>
       </Box>
-      <Box minW={{ base: '100%', lg: '350px' }} h={'225px'}>
-        <Text fontWeight={'semibold'} fontSize={'1.375rem'} color={'#343d6bff'}>
+
+      {/* Expenses Section */}
+      <Box flex={{ lg: '0.6' }} w="full" minH="225px">
+        <Text
+          fontWeight="semibold"
+          fontSize="1.375rem"
+          color="#343d6bff"
+          mb={4}
+        >
           My Expenses
         </Text>
-        <BarChart />
+        <Box h="calc(100% - 40px)">
+          <BarChart />
+        </Box>
       </Box>
-    </HStack>
+    </Flex>
   );
 };
 

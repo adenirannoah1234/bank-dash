@@ -10,7 +10,8 @@ const TransactionBox = () => {
       p={'5'}
       borderRadius={'2xl'}
       spacing={2}
-      w={'400'}
+      w={'full'}
+      // h={'full'}
       mt={4}
     >
       {TransactionData.map((data, index) => (
