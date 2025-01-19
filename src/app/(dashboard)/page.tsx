@@ -3,81 +3,84 @@
 import {
   Box,
   Flex,
-  HStack,
   InputLeftElement,
   InputGroup,
   VStack,
   Input,
+  Container,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Header from './components/Header';
-// import ChartOne from './components/ChartOne';
 import DashboardBarChart from './components/charts/DashboardBarChart';
 import DashboardPieChart from './components/charts/DashboardPieChart';
 import DashboardSplineChart from './components/charts/DashboardSplineChart';
 import SendFunds from './components/QuickTransfer';
 import { Search } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-// import PieCharts from './components/PieCharts';
 
 export default function Home() {
-  // const { data: session } = useSession();
-  // const token = session?.user?.token;
-  // console.log('token', token);
   return (
     <VStack
-      align={'stretch'}
-      w={'full'}
-      h={'full'}
+      align="stretch"
+      w="full"
+      h="full"
       spacing={8}
-      // bg={{ base: 'white', lg: 'auto' }}
+      maxW="100vw"
+      // px={{ base: 4, md: 6, lg: 8 }}
     >
-      <Box w={'325px'} mx={'auto'} display={{ base: 'flex', lg: 'none' }}>
-        <InputGroup size={'md'}>
+      <Box
+        w="full"
+        maxW="325px"
+        mx="auto"
+        display={{ base: 'flex', lg: 'none' }}
+      >
+        <InputGroup size="md">
           <InputLeftElement
             pointerEvents="none"
             children={<Search size={18} />}
-            // mt={10}
-            paddingLeft={'0.8rem'}
-            color={'#b2c2dbff'}
+            paddingLeft="0.8rem"
+            color="#b2c2dbff"
           />
           <Input
             placeholder="Search for something"
-            paddingLeft={'2.5rem'}
-            bg={'#f5f7faff'}
-            borderRadius={'200px'}
-            color={'#b2c2dbff'}
-            size={'md'}
-            // sx={{
-            //   color: '#b2c2dbff',
-            // }}
+            paddingLeft="2.5rem"
+            bg="#f5f7faff"
+            borderRadius="200px"
+            color="#b2c2dbff"
+            size="md"
           />
         </InputGroup>
       </Box>
+
       <Header />
-      {/* <ChartOne /> */}
-      {/* <PieCharts /> */}
+
       <Flex
+        w="full"
         gap={5}
         direction={{ base: 'column', lg: 'row' }}
-        alignItems={'center'}
-        justifyContent={'center'}
+        align="stretch"
       >
-        <Box minW={{ base: '100%', lg: '600px' }}>
+        <Box flex={{ lg: '3' }} w="full">
           <DashboardBarChart />
         </Box>
-        <Box w={{ base: '100%', lg: '350px' }}>
+        <Box flex={{ lg: '2' }} w="full">
           <DashboardPieChart />
         </Box>
       </Flex>
+
       <Flex
+        w="full"
         gap={5}
         direction={{ base: 'column', lg: 'row' }}
-        align={'center'}
+        align="stretch"
         pb={{ base: '30px', lg: 0 }}
       >
-        <SendFunds />
-        <DashboardSplineChart />
+        <Box flex={{ lg: '1' }} w="full">
+          <SendFunds />
+        </Box>
+        <Box flex={{ lg: '2' }} w="full">
+          <DashboardSplineChart />
+        </Box>
       </Flex>
     </VStack>
   );
