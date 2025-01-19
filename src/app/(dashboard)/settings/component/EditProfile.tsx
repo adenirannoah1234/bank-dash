@@ -66,7 +66,7 @@ const EditProfile = () => {
   const { formatProfileImage, cleanupImageUrl } = useFormatImage();
   const toast = useToast();
   const { data: userDetails, isLoading } = useGetUserDetailsQuery({});
-  console.log('userDetails', userDetails);
+  // console.log('userDetails', userDetails);
   const [updateUserDetails, { isLoading: isUpdating }] =
     useUpdateUserDetailsMutation();
   const dispatch = useAppDispatch();

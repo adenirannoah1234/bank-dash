@@ -81,7 +81,7 @@ const ExpensePieChart = () => {
   };
 
   return (
-    <Box>
+    <Box w="100%" h="100%">
       <Heading
         as="h3"
         fontSize="1.375rem"
@@ -93,7 +93,7 @@ const ExpensePieChart = () => {
       </Heading>
       <VStack
         bg="white"
-        minW="350px"
+        // minW="350px"
         h={{ base: '350px', lg: '323px' }}
         position="relative"
         mt={4}

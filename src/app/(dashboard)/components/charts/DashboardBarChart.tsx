@@ -75,7 +75,7 @@ const DashboardBarChart = () => {
   ];
 
   return (
-    <Box>
+    <Box w="100%" h="100%">
       <Heading
         as="h3"
         fontSize="1.375rem"
