@@ -32,7 +32,7 @@ export const InvestmentAndStock = () => {
         <div className="md:grid grid-cols-5 xl:grid-cols-3 gap-6">
         {/* My Investment */}
           <div className='md:col-span-3 xl:col-span-2'>
-          <p className='text-[#333B69] text-xl font-bold mb-4'>My Investment</p>
+          <p className='text-[#333B69] text-xl font-bold'>My Investment</p>
           <div className="overflow-x-auto py-6 rounded-xl">
               {investments.map((investment, index) => (
                   <div key={index} className="flex items-center bg-white p-4 mb-4 rounded-xl shadow-md">

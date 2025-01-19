@@ -49,7 +49,8 @@ export const LineChart = () => {
         },
         markers: {
             size: 5,
-            colors: ['#00000080'],
+            colors: ['#fff'],
+            strokeColors: '#FCAA0B',
         },
     };
 
@@ -99,6 +100,7 @@ export const LineChart = () => {
     };
     
     const lineData = [10000, 17000, 28000, 21000, 25000, 16000];
+    const straightLineData = [7000, 24000, 18000, 38000, 21000, 30000];
 
     return (
         <div className="md:flex space-x-6 space-y-4 md:space-y-0 my-10">
@@ -106,7 +108,7 @@ export const LineChart = () => {
             <div className='md:w-1/2'>
                 <p className='text-[#333B69] text-xl font-bold mb-4'>Yearly Total Investment</p>
                 <div className="bg-white">
-                    <Chart options={sharpLineOptions} series={[{ data: lineData }]} type="line" height={350} />
+                    <Chart options={sharpLineOptions} series={[{ data: straightLineData }]} type="line" height={350} />
                 </div>
             </div>
 
