@@ -13,7 +13,7 @@ import MobileTable from './MobileTable';
 
 const RecentTransactions = () => {
   return (
-    <Box marginTop={{ base: '3.2rem', lg: '1rem' }}>
+    <Box marginTop={{ base: '3.2rem', lg: '0.3rem' }}>
       <Text fontSize={'1.2rem'} fontWeight={'semibold'} color={'#343d6bff'}>
         Recent Transactions
       </Text>
