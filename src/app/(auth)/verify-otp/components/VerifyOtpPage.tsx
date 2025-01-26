@@ -149,6 +149,8 @@ const VerifyOtp = () => {
           w={{ base: 'full', md: '57%' }}
           isLoading={isLoading}
           onClick={() => {}} // This will be handled by onComplete
+          isDisabled={isLoading}
+          loadingText="Hold on, verifying OTP..."
         >
           Continue
         </Button>
