@@ -154,6 +154,8 @@ const ForgotPassword = () => {
           py={'1.5rem'}
           w="full"
           isLoading={isLoading}
+          isDisabled={isLoading}
+          loadingText="Hold on, sending OTP..."
         >
           Submit
         </Button>

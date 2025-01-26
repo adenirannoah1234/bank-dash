@@ -224,6 +224,8 @@ const ResetPassword = () => {
           py={'1.5rem'}
           w="full"
           isLoading={isLoading}
+          isDisabled={isLoading}
+          loadingText="Hold on, resetting password..."
         >
           Reset Password
         </Button>
