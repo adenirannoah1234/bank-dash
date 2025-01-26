@@ -46,21 +46,6 @@ interface FormData {
   profile_image: File | null;
 }
 
-interface UserDetails {
-  first_name?: string;
-  last_name?: string;
-  username?: string;
-  email?: string;
-  date_of_birth?: string;
-  city?: string;
-  postal_code?: string;
-  country?: string;
-  present_address?: string;
-  house_address?: string;
-  phone_number?: string;
-  profile_image?: string;
-}
-
 const EditProfile = () => {
   const { formatDateForInput, formatDateForDisplay } = useFormatDate();
   const { formatProfileImage, cleanupImageUrl } = useFormatImage();
@@ -114,6 +99,9 @@ const EditProfile = () => {
 
         const formattedImage = formatProfileImage(userDetails.profile_image);
         setProfilePreview(formattedImage);
+        if (formattedImage) {
+          localStorage.setItem('profile_image', formattedImage);
+        }
       }
 
       // Cleanup when component unmounts

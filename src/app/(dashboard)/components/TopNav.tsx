@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use, useEffect } from 'react';
 import {
   IconButton,
   Avatar,
@@ -14,13 +14,17 @@ import { TbSettings } from 'react-icons/tb';
 import { BellDot, Search } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { useAppSelector } from '@/lib/features/hook';
+import { useGetUserDetailsQuery } from '@/lib/features/auth/authSlice';
+import { useFormatImage } from '@/app/hooks/useFormatDateandImage';
 
 interface TopNavProps {
   onMenuClick: () => void;
 }
 const TopNav = ({ onMenuClick }: TopNavProps) => {
   const pathname = usePathname();
+  const { data: userDetails } = useGetUserDetailsQuery({});
+  const { formatProfileImage, cleanupImageUrl } = useFormatImage();
+
   // this is the function to get the current page name so i can display it in the navbar
   const getPageName = () => {
     if (pathname === '/') return 'Overview';
@@ -98,16 +102,25 @@ const TopNav = ({ onMenuClick }: TopNavProps) => {
         />
         <Avatar
           size={'md'}
-          name={'HP'}
-          src={'/christiana.png'}
-          borderRadius={'full'}
+          name={'User'}
+          src={
+            userDetails?.profile_image
+              ? formatProfileImage(userDetails.profile_image) ??
+                '/christiana.png'
+              : '/christiana.png'
+          }
         />
       </HStack>
       <Box display={{ base: 'block', lg: 'none' }}>
         <Avatar
           size={'md'}
-          name={'HP'}
-          src={'/christiana.png'}
+          name={'User'}
+          src={
+            userDetails?.profile_image
+              ? formatProfileImage(userDetails.profile_image) ??
+                '/christiana.png'
+              : '/christiana.png'
+          }
           borderRadius={'full'}
         />
       </Box>
