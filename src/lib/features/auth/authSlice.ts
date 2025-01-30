@@ -41,13 +41,11 @@ export const authSlice = apiSlice.injectEndpoints({
             }),
         }),
         updateUserDetails: builder.mutation({
-            query: (payload) => ({
+            query: (formData) => ({
                 url: `/user`,
                 method: "PUT",
-                body: payload,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                body: formData,
+              formData:true,
             }),
         }),
            
