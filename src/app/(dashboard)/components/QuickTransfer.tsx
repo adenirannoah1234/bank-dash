@@ -12,6 +12,7 @@ import {
   InputRightElement,
   InputGroup,
   Heading,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -19,6 +20,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { useState, useCallback, useEffect } from 'react';
 import { TransferContent } from '../../constants/data';
 import { LuSend } from 'react-icons/lu';
+import SendMoneyModal from './SendMoneyModal';
 
 export default function SendFunds() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -30,6 +32,7 @@ export default function SendFunds() {
   const [amount, setAmount] = useState('');
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSend = () => {
     console.log('Amount sent:', amount);
@@ -137,46 +140,21 @@ export default function SendFunds() {
             zIndex={10}
           />
         </Flex>
-        <HStack>
-          <Text color={'#718ebfff'}>Write Amount</Text>
-          <Flex align="center" marginTop="4">
-            <FormControl>
-              <InputGroup>
-                <Input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  flex="1"
-                  marginRight="2"
-                  borderRadius={'full'}
-                  border="none"
-                  _focus={{
-                    border: 'none',
-                    boxShadow: 'none',
-                  }}
-                  _hover={{
-                    border: 'none',
-                  }}
-                  outline="none"
-                  bg={'#edf1f7ff'}
-                />
-                <InputRightElement width="5rem">
-                  <Button
-                    h="2.5rem"
-                    px={'3rem'}
-                    size="sm"
-                    borderRadius={'full'}
-                    bg={'#1713f2ff'}
-                    color={'white'}
-                    rightIcon={<LuSend size={20} />}
-                  >
-                    Send
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-          </Flex>
+        <HStack marginTop="4">
+          <Button
+            h="2.5rem"
+            px={'3rem'}
+            size="sm"
+            borderRadius={'full'}
+            bg={'#1713f2ff'}
+            color={'white'}
+            rightIcon={<LuSend size={20} />}
+            onClick={onOpen}
+          >
+            Send Money
+          </Button>
         </HStack>
+        <SendMoneyModal isOpen={isOpen} onClose={onClose} />
       </Box>
     </Box>
   );

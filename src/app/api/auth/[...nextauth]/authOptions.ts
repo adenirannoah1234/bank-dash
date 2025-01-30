@@ -36,10 +36,10 @@ export const authOptions: AuthOptions = {
         },
         async authorize(credentials) {
           try {
-            console.log('Attempting login with credentials:', {
-              email: credentials?.email,
-              password: credentials?.password ? '[HIDDEN]' : undefined
-            });
+            // console.log('Attempting login with credentials:', {
+            //   email: credentials?.email,
+            //   password: credentials?.password ? '[HIDDEN]' : undefined
+            // });
   
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_URL}/login`,

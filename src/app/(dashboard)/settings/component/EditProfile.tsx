@@ -29,35 +29,20 @@ import {
 import { useAppDispatch } from '@/lib/features/hook';
 
 import { isFetchBaseQueryError } from '@/lib/features/api.slice';
-
-interface FormData {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  house_address: string;
-  phone_number: string;
-  date_of_birth: string;
-  city: string;
-  postal_code: string;
-  country: string;
-  present_address: string;
-  username: string;
-  profile_image: File | null;
-}
+import { FormDataTypes } from '@/app/constants/types';
 
 const EditProfile = () => {
   const { formatDateForInput, formatDateForDisplay } = useFormatDate();
   const { formatProfileImage, cleanupImageUrl } = useFormatImage();
   const toast = useToast();
   const { data: userDetails, isLoading } = useGetUserDetailsQuery({});
-  // console.log('userDetails', userDetails);
+
   const [updateUserDetails, { isLoading: isUpdating }] =
     useUpdateUserDetailsMutation();
   const dispatch = useAppDispatch();
   const [profilePreview, setProfilePreview] = useState<string | null>(null);
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormDataTypes>({
     email: '',
     password: '',
     first_name: '',
