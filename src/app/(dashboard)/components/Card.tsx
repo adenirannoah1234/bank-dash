@@ -6,20 +6,24 @@ interface VirtualCardProps {
     cardHolder: string;
     expiryDate: string;
     cardNumber: string;
+    textColor: string;
+    bgColor: string;
+    bgColor2: string;
   }
-export const VirtualCard: React.FC<VirtualCardProps> = ({ balance, cardHolder, expiryDate, cardNumber }) => {
+export const VirtualCard: React.FC<VirtualCardProps> = ({ balance, cardHolder, expiryDate, cardNumber, bgColor, textColor, bgColor2 }) => {
+    const formattedBalance = balance.toLocaleString();
   return (
-    <div className="bg-[#2D60FF] rounded-3xl shadow-md max-w-xs sm:max-w-sm relative text-white">
-    <div className="flex items-center justify-between p-6">
+    <div className={`rounded-3xl shadow-md max-w-xs sm:max-w-sm relative text-white ${bgColor}`}>
+    <div className={`flex items-center justify-between p-6 ${textColor}`}>
     <div>
         <p className="text-sm">Balance</p>
-        <p className="text-xl">${balance}</p>
+        <p className="text-xl">${formattedBalance}</p>
     </div>
     <div className="mr-4">
         <Image src="/Chip_Card.svg" alt="ATM Card" width={50} height={50} />
     </div>
     </div>
-    <div className='px-6 pb-2 flex justify-between'>
+    <div className={`px-6 pb-2 flex justify-between ${textColor}`}>
         <div>
             <p className="text-sm">CARD HOLDER</p>
             <p className="text-xl">{cardHolder}</p>
@@ -29,7 +33,7 @@ export const VirtualCard: React.FC<VirtualCardProps> = ({ balance, cardHolder, e
             <p>{expiryDate}</p>
         </div>
     </div>
-    <div className='bg-[#539BFF] w-[100%] rounded-b-3xl p-3 flex justify-between'>
+    <div className={`${bgColor2} ${textColor} w-[100%] rounded-b-3xl p-3 flex justify-between`}>
         <p className='font-semibold'>{cardNumber}</p>
         <Image src='/card_logo.svg' alt='card-logo' width={54} height={54} />
     </div>

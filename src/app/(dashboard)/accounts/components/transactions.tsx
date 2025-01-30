@@ -52,7 +52,7 @@ export const AccountTransactions = () => {
         {/* ATM Card */}
         <div className='md:col-span-2 xl:col-span-1'>
                 <p className="text-[#333B69] text-xl font-bold mb-4">My Card</p>
-                <VirtualCard balance={1200} cardHolder='Eddy Cusuma' expiryDate='12/22' cardNumber='3778 **** **** 1234' />
+                <VirtualCard balance={1200} cardHolder='Eddy Cusuma' expiryDate='12/22' cardNumber='3778 **** **** 1234' textColor='text-white' bgColor="bg-[#2D60FF]" bgColor2='bg-[#539BFF]' />
         </div>
         </div>
     </div>
