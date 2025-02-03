@@ -16,6 +16,7 @@ import DashboardPieChart from './components/charts/DashboardPieChart';
 import DashboardSplineChart from './components/charts/DashboardSplineChart';
 import SendFunds from './components/QuickTransfer';
 import { Search } from 'lucide-react';
+import BalanceComponets from './components/BalanceComponets';
 import { useSession } from 'next-auth/react';
 
 export default function Home() {
@@ -51,7 +52,7 @@ export default function Home() {
           />
         </InputGroup>
       </Box>
-
+      <BalanceComponets />
       <Header />
 
       <Flex

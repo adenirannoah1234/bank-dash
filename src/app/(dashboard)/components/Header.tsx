@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import TransactionBox from './TransactionBox';
+import { VirtualCard } from './Card';
 
 const Header = () => {
   return (
@@ -24,7 +25,7 @@ const Header = () => {
         >
           {/* Blue Card */}
           <Box position="relative" w={{ base: '350px', lg: '48%' }} h="235px">
-            <Image
+            {/* <Image
               src="/blue.png"
               alt="blue"
               width={350}
@@ -35,22 +36,28 @@ const Header = () => {
                 objectFit: 'contain',
               }}
               priority
+            /> */}
+            <VirtualCard
+              balance={5756}
+              cardHolder="Eddy Cusuma"
+              expiryDate="12/22"
+              cardNumber="3778 **** **** 1234"
+              textColor="text-white"
+              bgColor="bg-[#2e2bf0ff]"
+              bgColor2="bg-[#4c49f2ff]"
             />
           </Box>
 
           {/* White Card */}
           <Box position="relative" w={{ base: '350px', lg: '48%' }} h="235px">
-            <Image
-              src="/white.png"
-              alt="white"
-              width={350}
-              height={235}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-              }}
-              priority
+            <VirtualCard
+              balance={5756}
+              cardHolder="Eddy Cusuma"
+              expiryDate="12/22"
+              cardNumber="3778 **** **** 1234"
+              textColor="text-black"
+              bgColor="bg-[#ffffffff]"
+              bgColor2="bg-[#ffffffff]"
             />
           </Box>
         </Flex>
