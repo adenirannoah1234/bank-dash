@@ -2,6 +2,7 @@ import { HStack, Text, Flex, Box } from '@chakra-ui/react';
 import Image from 'next/image';
 import BarChart from './Barchart';
 import React from 'react';
+import { VirtualCard } from '../../components/Card';
 
 const Header = () => {
   return (
@@ -39,7 +40,7 @@ const Header = () => {
               minW={{ base: '350px', lg: '48%' }}
               h={{ base: '305px', lg: '305px' }}
             >
-              <Image
+              {/* <Image
                 src="/blue.png"
                 alt="blue"
                 width={350}
@@ -49,23 +50,31 @@ const Header = () => {
                   height: '100%',
                   objectFit: 'contain',
                 }}
+              /> */}
+              <VirtualCard
+                balance={5756}
+                cardHolder="Eddy Cusuma"
+                expiryDate="12/22"
+                cardNumber="3778 **** **** 1234"
+                textColor="text-white"
+                bgColor="bg-[#2e2bf0ff]"
+                bgColor2="bg-[#4c49f2ff]"
               />
             </Box>
             <Box
               position="relative"
               minW={{ base: '350px', lg: '48%' }}
               h={{ base: '305px', lg: '305px' }}
+              // #ffffffff
             >
-              <Image
-                src="/white.png"
-                alt="white"
-                width={350}
-                height={305}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                }}
+              <VirtualCard
+                balance={5756}
+                cardHolder="Eddy Cusuma"
+                expiryDate="12/22"
+                cardNumber="3778 **** **** 1234"
+                textColor="text-black"
+                bgColor="bg-[#ffffffff]"
+                bgColor2="bg-[#ffffffff]"
               />
             </Box>
           </Flex>
