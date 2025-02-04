@@ -49,7 +49,7 @@ const page = () => {
       if (response?.ok) {
         toast({
           title: 'Success',
-          description: 'Logged in successfully',
+          description: 'Welcome back!',
           status: 'success',
           duration: 5000,
           isClosable: true,
